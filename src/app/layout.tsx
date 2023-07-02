@@ -1,6 +1,8 @@
 import '../styles/globals.css'
 import {Inter} from 'next/font/google'
 import React from "react";
+import NavBar from "@/src/components/shared/NavBar";
+import { Providers } from '../redux/Provider';
 
 const inter = Inter({subsets: ['latin']})
 
@@ -25,7 +27,10 @@ export default function RootLayout({
                 <title>The Movie DB</title>
             </head>
             <body className={inter.className}>
-            {children}
+                <NavBar/>
+                <Providers>
+                    {children}
+                </Providers>
             </body>
         </html>
     )

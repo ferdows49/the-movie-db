@@ -1,8 +1,10 @@
-import Image from 'next/image'
-import NavBar from "@/src/components/shared/NavBar";
+import Listing from "@/src/components/listing/Listing";
 
 export default function Home() {
+
   return (
-    <NavBar />
-  )
+    <>
+      <Listing />
+    </>
+  );
 }
