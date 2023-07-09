@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
 
-const Rating = () => {
+const Rating = ({voteAverage}: any) => {
   return (
     <Box className="h-10 w-10 bg-black rounded-full relative inline-flex">
       <CircularProgress
@@ -32,7 +32,7 @@ const Rating = () => {
           variant="caption"
           component="div"
           className="text-slate-100"
-        >{`75%`}</Typography>
+        >{`${Math.round((voteAverage / 10) * 100)}%`}</Typography>
       </Box>
     </Box>
   );

@@ -11,6 +11,10 @@ import ArchiveIcon from "@mui/icons-material/Archive";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import IconButton from "@mui/material/IconButton";
+import ListIcon from '@mui/icons-material/List';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import GradeIcon from '@mui/icons-material/Grade';
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -89,21 +93,23 @@ const Options = () => {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose} disableRipple>
-          <EditIcon />
-          Edit
+          <ListIcon />
+          Add to list
         </MenuItem>
+        <Divider className="!m-0" />
         <MenuItem onClick={handleClose} disableRipple>
-          <FileCopyIcon />
-          Duplicate
+          <FavoriteIcon />
+          Favorite
         </MenuItem>
-        <Divider sx={{ my: 0.5 }} />
+        <Divider className="!m-0" />
         <MenuItem onClick={handleClose} disableRipple>
-          <ArchiveIcon />
-          Archive
+          <BookmarkIcon />
+          Watchlist
         </MenuItem>
+        <Divider className="!m-0" />
         <MenuItem onClick={handleClose} disableRipple>
-          <MoreHorizOutlinedIcon />
-          More
+          <GradeIcon />
+          Your rating
         </MenuItem>
       </StyledMenu>
     </div>
