@@ -10,7 +10,7 @@ export const movieApi = createApi({
   }),
   endpoints: (builder) => ({
     getPopularMovies: builder.query({
-      query: () => `/${ApiService.GET_POPULAR_MOVIE}?api_key=${UrlConfig.API_KEY}`
+      query: () => `/${ApiService.GET_POPULAR_MOVIES}?api_key=${UrlConfig.API_KEY}`
     })
   })
 });

@@ -2,17 +2,13 @@ import Listing from "@/src/components/listing/Listing";
 import axios from "axios";
 import { UrlConfig } from "../config/UrlConfig";
 import { ApiService } from "../config/ApiService";
+import Image from "next/image";
+import BannerImage from '../assets/images/banner.jpg';
 
-export default async function Home(users: any) {
-
-  const response = await axios.get(`${UrlConfig.BASE_URL}${ApiService.GET_POPULAR_MOVIE}?api_key=${UrlConfig.API_KEY}`);
-  const data = await response.data;
-
+export default async function Home() {
   return (
     <>
-      <Listing
-        data={data}
-      />
+      <Image src={BannerImage} alt="" />
     </>
   );
 }

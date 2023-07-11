@@ -90,7 +90,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
-
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -203,8 +202,8 @@ const NavBar = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", sm: "block", md: "none" },
-                '& .MuiPaper-root': {
-                  bgcolor: "#1A3851"
+                "& .MuiPaper-root": {
+                  bgcolor: "#1A3851",
                 },
               }}
             >
@@ -254,16 +253,16 @@ const NavBar = () => {
                   <Collapse in={xsTvOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                       <ListItemButton sx={{ pl: 4 }}>
-                        <Link href="">Popular</Link>
+                        <Link href="/tv-shows/popular">Popular</Link>
                       </ListItemButton>
                       <ListItemButton sx={{ pl: 4 }}>
-                        <Link href="">Airing Today</Link>
+                        <Link href="/tv-shows/airing-today">Airing Today</Link>
                       </ListItemButton>
                       <ListItemButton sx={{ pl: 4 }}>
-                        <Link href="">On TV</Link>
+                        <Link href="/tv-shows/on-the-air">On TV</Link>
                       </ListItemButton>
                       <ListItemButton sx={{ pl: 4 }}>
-                        <Link href="">Top Rated</Link>
+                        <Link href="/tv-shows/top-rated">Top Rated</Link>
                       </ListItemButton>
                     </List>
                   </Collapse>
@@ -349,10 +348,18 @@ const NavBar = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={handleClose}>Popular</MenuItem>
-                <MenuItem onClick={handleClose}>Airing Today</MenuItem>
-                <MenuItem onClick={handleClose}>On TV</MenuItem>
-                <MenuItem onClick={handleClose}>Top Rated</MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link href="/tv-shows/popular">Popular</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link href="/tv-shows/airing-today">Airing Today</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link href="/tv-shows/on-the-air">On TV</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link href="/tv-shows/top-rated">Top Rated</Link>
+                </MenuItem>
               </Menu>
             </Box>
 

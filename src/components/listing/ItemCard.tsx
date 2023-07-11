@@ -6,34 +6,41 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { CircularProgress, Grid, Pagination } from "@mui/material";
-import CardImage from "../../assets/images/card-image.jpg";
 import Image from "next/image";
-import Options from "./Options";
-import Rating from "./Rating";
+import Options from "./card/Options";
+import Rating from "./card/Rating";
 import Link from "next/link";
-import { useGetPopularMoviesQuery } from "@/src/redux/movies/movieApi";
 import { UrlConfig } from "@/src/config/UrlConfig";
 import { format } from "date-fns";
 import axios from "axios";
 import { ApiService } from "@/src/config/ApiService";
+import { useAppSelector } from "@/src/redux/hooks";
 
 type ItemTypes = {
   vote_average: number;
-  release_date: Date;
+  release_date: Date | string;
+  first_air_date: Date | string;
   title: string;
+  name?: string;
   id: number;
   poster_path: string;
 };
 
 type ItemCardPropsType = {
   data: any;
+  type: string;
   slug: string;
 };
 
-const ItemCard = ({ data, slug }: ItemCardPropsType) => {
+const ItemCard = ({ data, type, slug }: ItemCardPropsType) => {
+  const filteredBy = useAppSelector((state) => state.listingReducer.filter);
+  console.log("filteredBy", filteredBy);
+
   const [currentData, setCurrentData] = useState<any>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
+
+  console.log(currentData);
 
   const handlePageChange = async (
     event: React.ChangeEvent<unknown>,
@@ -42,14 +49,26 @@ const ItemCard = ({ data, slug }: ItemCardPropsType) => {
     setLoading(true);
     let url;
 
-    if (slug === "popular") {
-      url = `${UrlConfig.BASE_URL}${ApiService.GET_POPULAR_MOVIE}?page=${page}&api_key=${UrlConfig.API_KEY}`;
-    } else if (slug === "now-playing") {
-      url = `${UrlConfig.BASE_URL}${ApiService.GET_NOW_PLAYING_MOVIE}?page=${page}&api_key=${UrlConfig.API_KEY}`;
-    } else if (slug === "upcoming") {
-      url = `${UrlConfig.BASE_URL}${ApiService.GET_UPCOMING_MOVIE}?page=${page}&api_key=${UrlConfig.API_KEY}`;
-    } else if (slug === "top-rated") {
-      url = `${UrlConfig.BASE_URL}${ApiService.GET_TOP_RATED_MOVIE}?page=${page}&api_key=${UrlConfig.API_KEY}`;
+    if (type === "movies") {
+      if (slug === "popular") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_POPULAR_MOVIES}?page=${page}&api_key=${UrlConfig.API_KEY}`;
+      } else if (slug === "now-playing") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_NOW_PLAYING_MOVIES}?page=${page}&api_key=${UrlConfig.API_KEY}`;
+      } else if (slug === "upcoming") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_UPCOMING_MOVIES}?page=${page}&api_key=${UrlConfig.API_KEY}`;
+      } else if (slug === "top-rated") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_TOP_RATED_MOVIES}?page=${page}&api_key=${UrlConfig.API_KEY}`;
+      }
+    } else if (type === "tv-shows") {
+      if (slug === "popular") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_POPULAR_TV_SHOWS}?page=${page}&api_key=${UrlConfig.API_KEY}`;
+      } else if (slug === "airing-today") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_AIRING_TODAY_TV_SHOWS}?page=${page}&api_key=${UrlConfig.API_KEY}`;
+      } else if (slug === "on-the-air") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_ON_THE_AIR_TV_SHOWS}?page=${page}&api_key=${UrlConfig.API_KEY}`;
+      } else if (slug === "top-rated") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_TOP_RATED_TV_SHOWS}?page=${page}&api_key=${UrlConfig.API_KEY}`;
+      }
     }
 
     if (url) {
@@ -66,6 +85,38 @@ const ItemCard = ({ data, slug }: ItemCardPropsType) => {
         });
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      let url;
+      let params;
+
+      if (type === "movies") {
+        // if (filteredBy?.sortBy) {
+        //   params = `&sort_by=${filteredBy?.sortBy}`;
+        // }
+        url = `${UrlConfig.BASE_URL}${ApiService.FILTER_MOVIES}?page=${currentPage}&sort_by=${filteredBy?.sortBy}&api_key=${UrlConfig.API_KEY}`;
+      } else if (type === "tv-shows") {
+        url = `${UrlConfig.BASE_URL}${ApiService.FILTER_TV_SHOWS}?&api_key=${UrlConfig.API_KEY}`;
+      }
+
+      if (url) {
+        await axios
+          .get(url)
+          .then((res) => {
+            setCurrentData(res?.data);
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.log("err", err.message);
+            setLoading(false);
+          });
+      }
+    };
+
+    fetchData();
+  }, [filteredBy]);
 
   useEffect(() => {
     setCurrentData(data);
@@ -120,18 +171,23 @@ const ItemCard = ({ data, slug }: ItemCardPropsType) => {
                         variant="h5"
                         component="div"
                       >
-                        {item?.title}
+                        {item?.title || item?.name}
                       </Typography>
                     </Link>
 
-                    <Typography
-                      className="text-base font-normal text-black opacity-60 mb-0"
-                      gutterBottom
-                      variant="h5"
-                      component="div"
-                    >
-                      {format(new Date(item?.release_date), "dd MMM yyyy")}
-                    </Typography>
+                    {(item?.release_date || item?.first_air_date) && (
+                      <Typography
+                        className="text-base font-normal text-black opacity-60 mb-0"
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                      >
+                        {format(
+                          new Date(item?.release_date || item?.first_air_date),
+                          "dd MMM yyyy"
+                        )}
+                      </Typography>
+                    )}
                   </CardContent>
                 </Card>
               </Grid>

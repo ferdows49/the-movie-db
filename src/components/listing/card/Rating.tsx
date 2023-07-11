@@ -4,17 +4,28 @@ import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import { green } from "@mui/material/colors";
 
 const Rating = ({voteAverage}: any) => {
+
+  let color;
+
+  if (Math.round((voteAverage / 10) * 100) >= 75) {
+    color = "#4caf50"
+  } else if (Math.round((voteAverage / 10) * 100) < 75 && Math.round((voteAverage / 10) * 100) > 30) {
+    color = "#ffc107"
+  } else {
+    color = "#f4511e"
+  }
+
   return (
     <Box className="h-10 w-10 bg-black rounded-full relative inline-flex">
       <CircularProgress
         sx={{
-          color: green[500],
+          color: color,
+          opacity: "0.8"
         }}
         variant="determinate"
-        value={75}
+        value={Math.round((voteAverage / 10) * 100)}
       />
       <Box
         sx={{

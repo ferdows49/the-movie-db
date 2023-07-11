@@ -1,66 +1,37 @@
-import Listing from "@/src/components/listing/Listing";
+import React from "react";
 import { ApiService } from "@/src/config/ApiService";
 import { UrlConfig } from "@/src/config/UrlConfig";
 import axios from "axios";
-import { useRouter } from "next/router";
+import MovieList from "@/src/components/listing/MovieList";
 
-export default async function Movies({ params }: any) {
+type ParamsType = {
+  slug: string;
+};
 
-  if (params.slug === "popular") {
-    const response = await axios.get(
-      `${UrlConfig.BASE_URL}${ApiService.GET_POPULAR_MOVIE}?api_key=${UrlConfig.API_KEY}`
-    );
-    const data = await response.data;
+const Movies = async ({ params: { slug } }: { params: ParamsType }) => {
+  let data;
+  let url;
 
-    return (
-      <>
-        <Listing
-          data={data}
-          slug={params.slug}
-        />
-      </>
-    );
-  } else if (params.slug === "now-playing") {
-    const response = await axios.get(
-      `${UrlConfig.BASE_URL}${ApiService.GET_NOW_PLAYING_MOVIE}?api_key=${UrlConfig.API_KEY}`
-    );
-    const data = await response.data;
-
-    return (
-      <>
-        <Listing
-          data={data}
-          slug={params.slug}
-        />
-      </>
-    );
-  } else   if (params.slug === "upcoming") {
-    const response = await axios.get(
-      `${UrlConfig.BASE_URL}${ApiService.GET_UPCOMING_MOVIE}?api_key=${UrlConfig.API_KEY}`
-    );
-    const data = await response.data;
-
-    return (
-      <>
-        <Listing
-          data={data}
-          slug={params.slug}
-        />
-      </>
-    );
-  } else   if (params.slug === "top-rated") {
-    const response = await axios.get(
-      `${UrlConfig.BASE_URL}${ApiService.GET_TOP_RATED_MOVIE}?api_key=${UrlConfig.API_KEY}`
-    );
-    const data = await response.data;
-
-    return (
-      <>
-        <Listing
-          data={data}
-          slug={params.slug}
-        />
-      </>
-    );
+  if (slug === "popular") {
+    url = `${UrlConfig.BASE_URL}${ApiService.GET_POPULAR_MOVIES}?api_key=${UrlConfig.API_KEY}`;
+  } else if (slug === "now-playing") {
+    url = `${UrlConfig.BASE_URL}${ApiService.GET_NOW_PLAYING_MOVIES}?api_key=${UrlConfig.API_KEY}`;
+  } else if (slug === "upcoming") {
+    url = `${UrlConfig.BASE_URL}${ApiService.GET_UPCOMING_MOVIES}?api_key=${UrlConfig.API_KEY}`;
+  } else if (slug === "top-rated") {
+    url = `${UrlConfig.BASE_URL}${ApiService.GET_TOP_RATED_MOVIES}?api_key=${UrlConfig.API_KEY}`;
   }
-}
+
+  if (url) {
+    const response = await axios.get(url);
+    data = await response.data;
+  }
+
+  return (
+    <>
+      <MovieList data={data} slug={slug} />
+    </>
+  );
+};
+
+export default Movies;
