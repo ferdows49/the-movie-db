@@ -2,7 +2,7 @@ import React from "react";
 import { ApiService } from "@/src/config/ApiService";
 import { UrlConfig } from "@/src/config/UrlConfig";
 import axios from "axios";
-import TvShowList from "@/src/components/listing/tv-shows/TvShowList";
+import TvShowList from "@/src/components/listing/TvShowList";
 
 type ParamsType = {
   slug: string;

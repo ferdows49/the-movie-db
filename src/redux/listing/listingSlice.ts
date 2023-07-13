@@ -1,28 +1,45 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 
 type ListingState = {
-  filter: {
-    sortBy: string
+  isFilterParams: boolean,
+  filterParams: {
+    sortBy: string,
+    releaseFromDate: Date | null,
+    releaseToDate: Date | null
   }
 }
 
 const initialState = {
-  filter: {
-    sortBy: ""
+  isFilterParams: false,
+  filterParams: {
+    sortBy: "",
+    releaseFromDate: "",
+    releaseToDate: ""
   }
-} as ListingState;
+} as unknown as ListingState;
 
 export const listingSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
-    filter: (state, action) => {
-      state.filter = action.payload;
+    sortResultBy: (state, action: PayloadAction<string>) => {
+      state.filterParams.sortBy = action.payload;
+    },
+    releaseFromDate: (state, action: PayloadAction<Date | null>) => {
+      state.filterParams.releaseFromDate = action.payload;
+    },
+    releaseToDate: (state, action: PayloadAction<Date | null>) => {
+      state.filterParams.releaseToDate = action.payload;
     }
   }
 })
 
-export const {filter} = listingSlice.actions;
+export const {sortResultBy, releaseFromDate, releaseToDate} = listingSlice.actions;
+
+// export const sortRangeBy = (state: RootState) => state.listingReducer.filterParams.sortBy;
+// export const releaseFromDate = (state: RootState) => state.listingReducer.filterParams.releaseFromDate;
+// export const  releaseToDate = (state: RootState) => state.listingReducer.filterParams.releaseToDate;
 
 export default listingSlice.reducer;

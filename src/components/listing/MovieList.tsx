@@ -1,20 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { Grid, Pagination } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
+import { Grid, Pagination, Box } from "@mui/material";
 import { UrlConfig } from "@/src/config/UrlConfig";
-import { format } from "date-fns";
 import axios from "axios";
 import { ApiService } from "@/src/config/ApiService";
-import { useAppSelector } from "@/src/redux/hooks";
 import ItemCard from "./card/ItemCard";
-import SearchBar from "./SearchBar";
+import CircularLoading from "../shared/CircularLoading";
+import ItemFilter from "./filter/ItemFilter";
 
 type MovieListPropsType = {
   data: any;
@@ -43,6 +36,12 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
     page: number
   ) => {
     setLoading(true);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+
     let url;
 
     if (slug === "popular") {
@@ -71,7 +70,9 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     setCurrentData(data);
+    setLoading(false);
   }, []);
 
   return (
@@ -81,37 +82,43 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
     >
       <Grid container columnSpacing={3}>
         <Grid item xs={12} sm={12} md={3}>
-          <SearchBar />
+          <ItemFilter />
         </Grid>
 
         <Grid item xs={12} sm={12} md={9}>
-          <Grid container spacing={4}>
-            {currentData &&
-              currentData?.results?.length > 0 &&
-              currentData?.results?.map((item: ItemTypes) => (
-                <ItemCard
-                  key={item?.id}
-                  title={item?.title}
-                  posterPath={item?.poster_path}
-                  releaseDate={item?.release_date}
-                  voteAverage={item?.vote_average}
-                />
-              ))}
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
-              className="py-8 flex justify-center items-center"
-            >
-              <Pagination
-                count={currentData?.total_pages}
-                page={currentPage}
-                onChange={handlePageChange}
-              />
+          {loading ? (
+            <CircularLoading />
+          ) : (
+            <Grid container spacing={4}>
+              {currentData && currentData?.results?.length > 0 && (
+                <>
+                  {currentData?.results?.map((item: ItemTypes) => (
+                    <ItemCard
+                      key={item?.id}
+                      title={item?.title}
+                      posterPath={item?.poster_path}
+                      releaseDate={item?.release_date}
+                      voteAverage={item?.vote_average}
+                    />
+                  ))}
+                  <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    lg={12}
+                    className="py-8 flex justify-center items-center"
+                  >
+                    <Pagination
+                      count={currentData?.total_pages}
+                      page={currentPage}
+                      onChange={handlePageChange}
+                    />
+                  </Grid>
+                </>
+              )}
             </Grid>
-          </Grid>
+          )}
         </Grid>
       </Grid>
     </Box>
