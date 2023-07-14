@@ -9,5 +9,7 @@ export const ApiService = {
   GET_TOP_RATED_TV_SHOWS: '/tv/top_rated',
   FILTER_MOVIES: '/discover/movie',
   FILTER_TV_SHOWS: '',
-  GET_MOVIE_GENERS: '/genre/movie/list'
+  GET_MOVIE_GENERS: '/genre/movie/list',
+  GET_LANGUAGES: '/configuration/languages',
+  GET_FILTERED_DATA: "/discover/movie"
 };

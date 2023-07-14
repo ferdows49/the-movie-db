@@ -8,13 +8,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useAppDispatch } from "@/src/redux/hooks";
 import {
-  releaseFromDate,
-  releaseToDate,
+  filterByReleaseFromDate,
+  filterByReleaseToDate,
 } from "@/src/redux/listing/listingSlice";
 
 const ReleaseDate = () => {
   const dispatch = useAppDispatch();
-  
+
   const [releaseDateFrom, setReleaseDateFrom] = React.useState<Date | null>(
     null
   );
@@ -26,12 +26,12 @@ const ReleaseDate = () => {
 
   const releseDateFromHandler = (value: Date | null) => {
     setReleaseDateFrom(value);
-    dispatch(releaseFromDate(value));
+    dispatch(filterByReleaseFromDate(value));
   };
 
   const releseDateToHandler = (value: Date | null) => {
     setReleaseDateTO(value);
-    dispatch(releaseToDate(value));
+    dispatch(filterByReleaseToDate(value));
   };
 
   useEffect(() => {

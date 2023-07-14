@@ -10,14 +10,35 @@ export const movieApi = createApi({
   }),
   endpoints: (builder) => ({
     getPopularMovies: builder.query({
-      query: () =>
-        `/${ApiService.GET_POPULAR_MOVIES}?api_key=${UrlConfig.API_KEY}`,
+      query: () => ({
+        url: `${ApiService.GET_POPULAR_MOVIES}`,
+        params: { api_key: UrlConfig.API_KEY },
+      }),
     }),
     getMovieGenres: builder.query({
-      query: () =>
-        `/${ApiService.GET_MOVIE_GENERS}?api_key=${UrlConfig.API_KEY}`,
+      query: () => ({
+        url: `${ApiService.GET_MOVIE_GENERS}`,
+        params: { api_key: UrlConfig.API_KEY },
+      }),
+    }),
+    getLanguages: builder.query({
+      query: () => ({
+        url: `${ApiService.GET_LANGUAGES}`,
+        params: { api_key: UrlConfig.API_KEY },
+      }),
+    }),
+    getFilteredData: builder.query({
+      query: (param: object) => ({
+        url: `${ApiService.GET_FILTERED_DATA}`,
+        params: { ...param, api_key: UrlConfig.API_KEY },
+      }),
     }),
   }),
 });
 
-export const { useGetPopularMoviesQuery, useGetMovieGenresQuery } = movieApi;
+export const {
+  useGetPopularMoviesQuery,
+  useGetMovieGenresQuery,
+  useGetLanguagesQuery,
+  useGetFilteredDataQuery
+} = movieApi;

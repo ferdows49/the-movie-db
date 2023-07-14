@@ -1,23 +1,35 @@
-import { PayloadAction, createAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type ListingState = {
-  isFilterParams: boolean,
+  isFilterParams: boolean;
+  filterUrl: string;
   filterParams: {
-    sortBy: string,
-    releaseFromDate: Date | null,
-    releaseToDate: Date | null
-  }
-}
+    sortBy: string;
+    releaseFromDate: Date | null;
+    releaseToDate: Date | null;
+    genres: number[];
+    language: string;
+    userScore: number[];
+    minimumVots: number | number[];
+    runtime: number[];
+    keyword: string;
+  };
+};
 
 const initialState = {
   isFilterParams: false,
+  filterUrl: "",
   filterParams: {
     sortBy: "",
     releaseFromDate: "",
-    releaseToDate: ""
-  }
+    releaseToDate: "",
+    genres: [],
+    language: "",
+    userScore: [],
+    minimumVots: 0,
+    runtime: [],
+    keyword: "",
+  },
 } as unknown as ListingState;
 
 export const listingSlice = createSlice({
@@ -27,19 +39,54 @@ export const listingSlice = createSlice({
     sortResultBy: (state, action: PayloadAction<string>) => {
       state.filterParams.sortBy = action.payload;
     },
-    releaseFromDate: (state, action: PayloadAction<Date | null>) => {
+    filterByReleaseFromDate: (state, action: PayloadAction<Date | null>) => {
       state.filterParams.releaseFromDate = action.payload;
     },
-    releaseToDate: (state, action: PayloadAction<Date | null>) => {
+    filterByReleaseToDate: (state, action: PayloadAction<Date | null>) => {
       state.filterParams.releaseToDate = action.payload;
-    }
-  }
-})
+    },
+    filterByGenres: (state, action: PayloadAction<number[]>) => {
+      state.filterParams.genres = action.payload;
+    },
+    filterByLanguage: (state, action: PayloadAction<string>) => {
+      state.filterParams.language = action.payload;
+    },
+    filterByUserScore: (state, action: PayloadAction<number[]>) => {
+      state.filterParams.userScore = action.payload;
+    },
+    filterByMinimumVots: (state, action: PayloadAction<number | number[]>) => {
+      state.filterParams.minimumVots = action.payload;
+    },
+    filterByRuntime: (state, action: PayloadAction<number[]>) => {
+      state.filterParams.runtime = action.payload;
+    },
+    filterByKeyWoard: (state, action: PayloadAction<string>) => {
+      state.filterParams.keyword = action.payload;
+    },
+    filterBy: (state, action: PayloadAction<string>) => {
+      state.isFilterParams = true;
+      state.filterUrl = action.payload;
+    },
+    clearFilter: (state) => {
+      state.isFilterParams = false;
+      state.filterUrl = "";
+      state.filterParams = initialState.filterParams;
+    },
+  },
+});
 
-export const {sortResultBy, releaseFromDate, releaseToDate} = listingSlice.actions;
-
-// export const sortRangeBy = (state: RootState) => state.listingReducer.filterParams.sortBy;
-// export const releaseFromDate = (state: RootState) => state.listingReducer.filterParams.releaseFromDate;
-// export const  releaseToDate = (state: RootState) => state.listingReducer.filterParams.releaseToDate;
+export const {
+  sortResultBy,
+  filterByReleaseFromDate,
+  filterByReleaseToDate,
+  filterByGenres,
+  filterByLanguage,
+  filterByUserScore,
+  filterByMinimumVots,
+  filterByRuntime,
+  filterByKeyWoard,
+  filterBy,
+  clearFilter,
+} = listingSlice.actions;
 
 export default listingSlice.reducer;
