@@ -1,11 +1,9 @@
-"use client";
-
 import React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { Typography } from "@mui/material";
 import { filterByMinimumVots } from "@/src/redux/listing/listingSlice";
-import { useAppDispatch } from "@/src/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 
 const marks = [
   {
@@ -35,12 +33,13 @@ const marks = [
 ];
 
 const MinimumVotes = () => {
+  const { minimumVots } = useAppSelector(
+    (state) => state.listingReducer.filterParams
+  );
+
   const dispatch = useAppDispatch();
 
-  const [value, setValue] = React.useState<number | number[]>(0);
-
   const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue);
     dispatch(filterByMinimumVots(newValue));
   };
 
@@ -48,8 +47,8 @@ const MinimumVotes = () => {
     <Box>
       <Typography sx={{ marginBottom: "8px" }}>Minimum User Votes</Typography>
       <Slider
-        aria-label="Temperature"
-        value={value}
+        aria-label="Minimum User Votes"
+        value={minimumVots}
         onChange={handleChange}
         defaultValue={0}
         valueLabelDisplay="auto"

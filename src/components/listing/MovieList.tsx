@@ -30,9 +30,6 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
     (state) => state.listingReducer
   );
 
-  console.log("filterUrl", filterUrl);
-  console.log("isFilterParams", isFilterParams);
-
   const [currentData, setCurrentData] = useState<any>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
@@ -74,7 +71,6 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
           setLoading(false);
         })
         .catch((err) => {
-          console.log("err", err.message);
           setLoading(false);
         });
     }
@@ -107,6 +103,7 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
             <ItemFilter
               setLoading={setLoading}
               setCurrentData={setCurrentData}
+              setCurrentPage={setCurrentPage}
             />
           </Grid>
 

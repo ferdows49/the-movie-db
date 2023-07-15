@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Box, Typography, Chip } from "@mui/material";
 import { useGetMovieGenresQuery } from "@/src/redux/listing/movieApi";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
@@ -12,32 +10,26 @@ type GenreTypes = {
 };
 
 const Genres = () => {
+  const selectedGenreId = useAppSelector(
+    (state) => state.listingReducer.filterParams.genres
+  );
 
   const { data } = useGetMovieGenresQuery("");
 
   const dispatch = useAppDispatch();
 
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  const [selectedGenreId, setSelectedGenreId] = useState<number[]>([]);
-
-  const handleClick = (id: number, name: string) => {
-    if (selectedGenres.includes(name)) {
-      const filteredGenres = selectedGenres?.filter((item) => item !== name);
-      setSelectedGenres(filteredGenres);
-
+  const handleClick = (id: number) => {
+    if (selectedGenreId?.includes(id)) {
       const filteredGenreId = selectedGenreId?.filter((item) => item !== id);
-      setSelectedGenreId(filteredGenreId);
+      dispatch(filterByGenres(filteredGenreId));
     } else {
-      setSelectedGenres([...selectedGenres, name]);
-      setSelectedGenreId([...selectedGenreId, id]);
+      let newGenre = [
+        ...selectedGenreId,
+        id
+      ]
+      dispatch(filterByGenres(newGenre));
     }
   };
-
-  useEffect(() => {
-    if (selectedGenreId) {
-      dispatch(filterByGenres(selectedGenreId));
-    }
-  }, [selectedGenreId]);
 
   return (
     <Box>
@@ -50,13 +42,13 @@ const Genres = () => {
               key={id}
               sx={{
                 color: `${
-                  selectedGenres.includes(name) ? "#FFFFFF" : "#000000de"
+                  selectedGenreId.includes(id) ? "#FFFFFF" : "#000000de"
                 }`,
                 backgroundColor: `${
-                  selectedGenres.includes(name) ? "#01B4E4" : "#FFFFFF"
+                  selectedGenreId.includes(id) ? "#01B4E4" : "#FFFFFF"
                 }`,
                 border: `${
-                  selectedGenres.includes(name)
+                  selectedGenreId.includes(id)
                     ? "1px solid #01B4E4"
                     : "1px solid #000000de"
                 }`,
@@ -72,7 +64,7 @@ const Genres = () => {
               label={name}
               variant="outlined"
               size="medium"
-              onClick={() => handleClick(id, name)}
+              onClick={() => handleClick(id)}
             />
           ))}
       </Box>

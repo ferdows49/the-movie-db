@@ -61,7 +61,7 @@ const UserScore = () => {
     <Box>
       <Typography sx={{ marginBottom: "8px" }}>User Score</Typography>
       <Slider
-        getAriaLabel={() => "Temperature range"}
+        getAriaLabel={() => "User Score"}
         value={value}
         onChange={handleChange}
         valueLabelDisplay="auto"

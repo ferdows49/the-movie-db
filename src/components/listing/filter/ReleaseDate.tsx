@@ -1,54 +1,64 @@
-"use client";
-
 import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useAppDispatch } from "@/src/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import {
   filterByReleaseFromDate,
   filterByReleaseToDate,
 } from "@/src/redux/listing/listingSlice";
 
 const ReleaseDate = () => {
+  const { releaseFromDate, releaseToDate } = useAppSelector(
+    (state) => state.listingReducer.filterParams
+  );
+
   const dispatch = useAppDispatch();
 
-  const [releaseDateFrom, setReleaseDateFrom] = React.useState<Date | null>(
-    null
-  );
-  const [releaseDateTO, setReleaseDateTO] = React.useState<Date | null>(null);
   const [releaseDateFromFormat, setReleaseDateFromFormat] =
     React.useState<string>("__/__/____");
   const [releaseDateTOFormat, setReleaseDateTOFormat] =
     React.useState<string>("__/__/____");
 
   const releseDateFromHandler = (value: Date | null) => {
-    setReleaseDateFrom(value);
-    dispatch(filterByReleaseFromDate(value));
+    if (value) {
+      let dateObj = new Date(value);
+      let year = dateObj.getUTCFullYear();
+      let month = ("0" + (dateObj.getUTCMonth() + 1)).slice(-2);
+      let day = ("0" + dateObj.getUTCDate()).slice(-2);
+      let formattedDate = year + "-" + month + "-" + day;
+      dispatch(filterByReleaseFromDate(formattedDate));
+    }
   };
 
   const releseDateToHandler = (value: Date | null) => {
-    setReleaseDateTO(value);
-    dispatch(filterByReleaseToDate(value));
+    if (value) {
+      let dateObj = new Date(value);
+      let year = dateObj.getUTCFullYear();
+      let month = ("0" + (dateObj.getUTCMonth() + 1)).slice(-2);
+      let day = ("0" + dateObj.getUTCDate()).slice(-2);
+      let formattedDate = year + "-" + month + "-" + day;
+      dispatch(filterByReleaseToDate(formattedDate));
+    }
   };
 
   useEffect(() => {
-    if (releaseDateFrom) {
+    if (releaseFromDate) {
       setReleaseDateFromFormat("DD/MM/YYYY");
     } else {
       setReleaseDateFromFormat("__/__/____");
     }
-  }, [releaseDateFrom]);
+  }, [releaseFromDate]);
 
   useEffect(() => {
-    if (releaseDateTO) {
+    if (releaseToDate) {
       setReleaseDateTOFormat("DD/MM/YYYY");
     } else {
       setReleaseDateTOFormat("__/__/____");
     }
-  }, [releaseDateTO]);
+  }, [releaseToDate]);
 
   return (
     <Box>
@@ -56,7 +66,6 @@ const ReleaseDate = () => {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DatePicker"]}>
           <DatePicker
-            value={releaseDateFrom}
             format={releaseDateFromFormat}
             onChange={releseDateFromHandler}
             sx={{ width: "-webkit-fill-available", marginBottom: "8px" }}
@@ -65,11 +74,11 @@ const ReleaseDate = () => {
           />
         </DemoContainer>
       </LocalizationProvider>
+
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DatePicker"]}>
           <DatePicker
             format={releaseDateTOFormat}
-            value={releaseDateTO}
             onChange={releseDateToHandler}
             sx={{ width: "-webkit-fill-available" }}
             label="To"

@@ -44,7 +44,7 @@ const RunTime = () => {
     <Box>
       <Typography sx={{ marginBottom: "8px" }}>Runtime</Typography>
       <Slider
-        getAriaLabel={() => "Temperature range"}
+        getAriaLabel={() => "Runtime"}
         value={value}
         onChange={handleChange}
         valueLabelDisplay="auto"

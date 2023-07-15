@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Card, CardContent, Box, Button, Divider } from "@mui/material";
 import SortBy from "./SortBy";
@@ -23,9 +21,14 @@ import { clearFilter, filterBy } from "@/src/redux/listing/listingSlice";
 type PropsType = {
   setCurrentData: any;
   setLoading: any;
+  setCurrentPage: any;
 };
 
-const ItemFilter = ({ setCurrentData, setLoading }: PropsType) => {
+const ItemFilter = ({
+  setCurrentData,
+  setLoading,
+  setCurrentPage,
+}: PropsType) => {
   const filterParams = useAppSelector(
     (state) => state.listingReducer.filterParams
   );
@@ -37,11 +40,36 @@ const ItemFilter = ({ setCurrentData, setLoading }: PropsType) => {
   };
 
   const handleSearch = async () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
     let params = "";
 
     for (const key in filterParams) {
       if (key === "sortBy" && filterParams[key]) {
-        params += `sort_by=${filterParams[key]}&`;
+        let newValue = "";
+
+        if (filterParams[key] === "Popularity Descending") {
+          newValue = "popularity.desc";
+        } else if (filterParams[key] === "Popularity Ascending") {
+          newValue = "popularity.asc";
+        } else if (filterParams[key] === "Rating Descending") {
+          newValue = "vote_average.desc";
+        } else if (filterParams[key] === "Rating Ascending") {
+          newValue = "vote_average.asc";
+        } else if (filterParams[key] === "Release Date Descending") {
+          newValue = "primary_release_date.desc";
+        } else if (filterParams[key] === "Release Date Ascending") {
+          newValue = "primary_release_date.asc";
+        } else if (filterParams[key] === "Revenue Descending") {
+          newValue = "revenue.desc";
+        } else if (filterParams[key] === "Revenue Ascending") {
+          newValue = "revenue.asc";
+        }
+
+        params += `sort_by=${newValue}&`;
       } else if (key === "releaseFromDate" && filterParams[key]) {
         params += `release_date.gte=${filterParams[key]}&`;
       } else if (key === "releaseToDate" && filterParams[key]) {
@@ -73,10 +101,13 @@ const ItemFilter = ({ setCurrentData, setLoading }: PropsType) => {
     if (params) {
       setLoading(true);
 
-      const url = `${UrlConfig.BASE_URL}${ApiService.GET_FILTERED_DATA}?${params}api_key=${UrlConfig.API_KEY}`;
+      const url = `${UrlConfig.BASE_URL}${
+        ApiService.GET_FILTERED_DATA
+      }?page=${1}&${params}api_key=${UrlConfig.API_KEY}`;
       const response = await axios.get(url);
       const data = await response.data;
       setCurrentData(data);
+      setCurrentPage(1);
 
       setLoading(false);
 

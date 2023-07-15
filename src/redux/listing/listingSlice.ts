@@ -5,8 +5,8 @@ type ListingState = {
   filterUrl: string;
   filterParams: {
     sortBy: string;
-    releaseFromDate: Date | null;
-    releaseToDate: Date | null;
+    releaseFromDate: string;
+    releaseToDate: string;
     genres: number[];
     language: string;
     userScore: number[];
@@ -21,8 +21,8 @@ const initialState = {
   filterUrl: "",
   filterParams: {
     sortBy: "",
-    releaseFromDate: "",
-    releaseToDate: "",
+    releaseFromDate: null,
+    releaseToDate: null,
     genres: [],
     language: "",
     userScore: [],
@@ -39,10 +39,10 @@ export const listingSlice = createSlice({
     sortResultBy: (state, action: PayloadAction<string>) => {
       state.filterParams.sortBy = action.payload;
     },
-    filterByReleaseFromDate: (state, action: PayloadAction<Date | null>) => {
+    filterByReleaseFromDate: (state, action: PayloadAction<string>) => {
       state.filterParams.releaseFromDate = action.payload;
     },
-    filterByReleaseToDate: (state, action: PayloadAction<Date | null>) => {
+    filterByReleaseToDate: (state, action: PayloadAction<string>) => {
       state.filterParams.releaseToDate = action.payload;
     },
     filterByGenres: (state, action: PayloadAction<number[]>) => {

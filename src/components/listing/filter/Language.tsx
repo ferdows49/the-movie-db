@@ -1,8 +1,6 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { Box, Typography, TextField, Autocomplete } from "@mui/material";
-import { useAppDispatch } from "@/src/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { useGetLanguagesQuery } from "@/src/redux/listing/movieApi";
 import { filterByLanguage } from "@/src/redux/listing/listingSlice";
 
@@ -11,19 +9,20 @@ type ItemTypes = {
 };
 
 const Language = () => {
+  const language = useAppSelector(
+    (state) => state.listingReducer.filterParams.language
+  );
+
   const { data } = useGetLanguagesQuery("");
 
   const dispatch = useAppDispatch();
 
-  const [language, setLanguage] = useState<string>("");
   const [allLanguage, setAllLanguage] = useState<string[]>([]);
 
   const handleChange = (event: any, newValue: string | null) => {
     if (newValue === null) {
-      setLanguage("");
       dispatch(filterByLanguage(""));
     } else {
-      setLanguage(newValue);
       dispatch(filterByLanguage(newValue));
     }
   };
