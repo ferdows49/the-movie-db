@@ -1,20 +1,23 @@
-import React, {useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Chip } from "@mui/material";
 import { useGetMovieGenresQuery } from "@/src/redux/listing/movieApi";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { filterByGenres } from "@/src/redux/listing/listingSlice";
+import axios from "axios";
+import { UrlConfig } from "@/src/config/UrlConfig";
+import { ApiService } from "@/src/config/ApiService";
 
 type GenreTypes = {
   id: number;
   name: string;
 };
 
-const Genres = () => {
+const Genres = ({ type }: { type: string }) => {
   const selectedGenreId = useAppSelector(
     (state) => state.listingReducer.filterParams.genres
   );
 
-  const { data } = useGetMovieGenresQuery("");
+  const [data, setData] = useState<any>();
 
   const dispatch = useAppDispatch();
 
@@ -23,13 +26,29 @@ const Genres = () => {
       const filteredGenreId = selectedGenreId?.filter((item) => item !== id);
       dispatch(filterByGenres(filteredGenreId));
     } else {
-      let newGenre = [
-        ...selectedGenreId,
-        id
-      ]
+      let newGenre = [...selectedGenreId, id];
       dispatch(filterByGenres(newGenre));
     }
   };
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      let url;
+      if (type === "movie") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_MOVIE_GENERS}?api_key=${UrlConfig.API_KEY}`;
+      } else if (type === "tv-show") {
+        url = `${UrlConfig.BASE_URL}${ApiService.GET_TV_SHOW_GENERS}?api_key=${UrlConfig.API_KEY}`;
+      }
+
+      if (url) {
+        axios.get(url).then(
+          res => setData(res?.data)
+        )
+      }
+    };
+
+    fetchGenres();
+  }, [type]);
 
   return (
     <Box>

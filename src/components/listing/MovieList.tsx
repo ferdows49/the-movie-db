@@ -26,7 +26,7 @@ type ItemTypes = {
 };
 
 const MovieList = ({ data, slug }: MovieListPropsType) => {
-  const { filterUrl, isFilterParams, filterParams } = useAppSelector(
+  const { filterUrl, isFilterParams } = useAppSelector(
     (state) => state.listingReducer
   );
 
@@ -35,7 +35,6 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handlePageChange = async (
-    // event: React.ChangeEvent<unknown>,
     event: any,
     page: number
   ) => {
@@ -49,7 +48,7 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
     let url;
 
     if (isFilterParams) {
-      url = `${UrlConfig.BASE_URL}${ApiService.GET_FILTERED_DATA}?page=${page}&${filterUrl}api_key=${UrlConfig.API_KEY}`;
+      url = `${UrlConfig.BASE_URL}${ApiService.FILTER_MOVIES}?page=${page}&${filterUrl}api_key=${UrlConfig.API_KEY}`;
     } else {
       if (slug === "popular") {
         url = `${UrlConfig.BASE_URL}${ApiService.GET_POPULAR_MOVIES}?page=${page}&api_key=${UrlConfig.API_KEY}`;
@@ -104,6 +103,7 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
               setLoading={setLoading}
               setCurrentData={setCurrentData}
               setCurrentPage={setCurrentPage}
+              type={"movie"}
             />
           </Grid>
 

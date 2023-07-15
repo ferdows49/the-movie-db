@@ -7,9 +7,9 @@ export const ApiService = {
   GET_AIRING_TODAY_TV_SHOWS: '/tv/airing_today',
   GET_ON_THE_AIR_TV_SHOWS: '/tv/on_the_air',
   GET_TOP_RATED_TV_SHOWS: '/tv/top_rated',
-  FILTER_MOVIES: '/discover/movie',
-  FILTER_TV_SHOWS: '',
   GET_MOVIE_GENERS: '/genre/movie/list',
+  GET_TV_SHOW_GENERS: '/genre/tv/list',
   GET_LANGUAGES: '/configuration/languages',
-  GET_FILTERED_DATA: "/discover/movie"
+  FILTER_MOVIES: "/discover/movie",
+  FILTER_TV_SHOWS: "/discover/tv",
 };

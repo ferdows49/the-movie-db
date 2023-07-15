@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardContent, Box, Button, Divider } from "@mui/material";
 import SortBy from "./SortBy";
 import ReleaseDate from "./ReleaseDate";
@@ -10,10 +10,6 @@ import RunTime from "./RunTime";
 import Keywords from "./Keywords";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { UrlConfig } from "@/src/config/UrlConfig";
-import {
-  useGetFilteredDataQuery,
-  useGetLanguagesQuery,
-} from "@/src/redux/listing/movieApi";
 import axios from "axios";
 import { ApiService } from "@/src/config/ApiService";
 import { clearFilter, filterBy } from "@/src/redux/listing/listingSlice";
@@ -22,12 +18,14 @@ type PropsType = {
   setCurrentData: any;
   setLoading: any;
   setCurrentPage: any;
+  type: string;
 };
 
 const ItemFilter = ({
   setCurrentData,
   setLoading,
   setCurrentPage,
+  type,
 }: PropsType) => {
   const filterParams = useAppSelector(
     (state) => state.listingReducer.filterParams
@@ -46,6 +44,7 @@ const ItemFilter = ({
     });
 
     let params = "";
+    let url = "";
 
     for (const key in filterParams) {
       if (key === "sortBy" && filterParams[key]) {
@@ -101,9 +100,15 @@ const ItemFilter = ({
     if (params) {
       setLoading(true);
 
-      const url = `${UrlConfig.BASE_URL}${
-        ApiService.GET_FILTERED_DATA
-      }?page=${1}&${params}api_key=${UrlConfig.API_KEY}`;
+      if (type === "movie") {
+        url = `${UrlConfig.BASE_URL}${
+          ApiService.FILTER_MOVIES
+        }?page=${1}&${params}api_key=${UrlConfig.API_KEY}`;
+      } else if (type === "tv-show") {
+        url = `${UrlConfig.BASE_URL}${
+          ApiService.FILTER_TV_SHOWS
+        }?page=${1}&${params}api_key=${UrlConfig.API_KEY}`;
+      }
       const response = await axios.get(url);
       const data = await response.data;
       setCurrentData(data);
@@ -114,6 +119,12 @@ const ItemFilter = ({
       dispatch(filterBy(params));
     }
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearFilter());
+    };
+  }, []);
 
   return (
     <Card>
@@ -126,7 +137,7 @@ const ItemFilter = ({
 
         <Divider sx={{ marginTop: "14px", marginBottom: "10px" }} />
 
-        <Geners />
+        <Geners type={type} />
 
         <Divider sx={{ marginTop: "14px", marginBottom: "10px" }} />
 

@@ -10,6 +10,7 @@ import { UrlConfig } from "@/src/config/UrlConfig";
 import { format } from "date-fns";
 import Options from "./Options";
 import Rating from "./Rating";
+import NotFoundImage from "../../../assets/images/not-found-image.svg";
 
 type ItemCardPropsType = {
   posterPath: string;
@@ -29,13 +30,23 @@ const ItemCard = ({
       <Card className="rounded-lg shadow-md">
         <Box className="relative" sx={{ height: "320px" }}>
           <Link href="/">
-            <Image
-              width={500}
-              height={280}
-              src={`${UrlConfig.IMAGE_BASE_URL}${posterPath}`}
-              alt=""
-              className="w-full h-full cursor-pointer"
-            />
+            {posterPath ? (
+              <Image
+                width={500}
+                height={280}
+                src={`${UrlConfig.IMAGE_BASE_URL}${posterPath}`}
+                alt=""
+                className="w-full h-full cursor-pointer"
+              />
+            ) : (
+              <Image
+                width={500}
+                height={280}
+                src={NotFoundImage}
+                alt=""
+                className="w-full h-full cursor-pointer bg-gray-200"
+              />
+            )}
           </Link>
           <Box className="absolute top-3 right-3">
             <Options />
