@@ -13,36 +13,18 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import Image from "next/image";
-import { styled, alpha, makeStyles } from "@mui/material/styles";
+import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Divider from "@mui/material/Divider";
-import Paper from "@mui/material/Paper";
-import MenuList from "@mui/material/MenuList";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ContentCut from "@mui/icons-material/ContentCut";
-import ContentCopy from "@mui/icons-material/ContentCopy";
-import ContentPaste from "@mui/icons-material/ContentPaste";
-import Cloud from "@mui/icons-material/Cloud";
 import TmdbIcon from "../../assets/icons/icon.svg";
 import Link from "next/link";
-
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
 
 const pages = ["Movies", "Tv Shows", "People"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -158,7 +140,7 @@ const NavBar = () => {
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#032541" }}>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" className="sm:px-6 md:px-10">
         <Toolbar disableGutters>
           <Box
             sx={{
@@ -283,7 +265,7 @@ const NavBar = () => {
                   <Collapse in={xsPeopleOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                       <ListItemButton sx={{ pl: 4 }}>
-                        <Link href="">Popular People</Link>
+                        <Link href="/person">Popular People</Link>
                       </ListItemButton>
                     </List>
                   </Collapse>
@@ -383,7 +365,9 @@ const NavBar = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={handleClose}>Popular People</MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link href="/person">Popular People</Link>
+                </MenuItem>
               </Menu>
             </Box>
           </Box>

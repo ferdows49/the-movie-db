@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Grid, Pagination, Box } from "@mui/material";
+import { Grid, Pagination, Typography } from "@mui/material";
 import { UrlConfig } from "@/src/config/UrlConfig";
 import axios from "axios";
 import { ApiService } from "@/src/config/ApiService";
@@ -9,6 +9,7 @@ import ItemCard from "./card/ItemCard";
 import CircularLoading from "../shared/CircularLoading";
 import ItemFilter from "./filter/ItemFilter";
 import { useAppSelector } from "@/src/redux/hooks";
+import CustomContainer from "../shared/CustomContainer";
 
 type MovieListPropsType = {
   data: any;
@@ -34,10 +35,7 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handlePageChange = async (
-    event: any,
-    page: number
-  ) => {
+  const handlePageChange = async (event: any, page: number) => {
     setLoading(true);
 
     window.scrollTo({
@@ -90,14 +88,34 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
   }, [isFilterParams]);
 
   return (
-    <Box
-      className="p-4 sm:p-6 md:p-10 bg-slate-100 bg-opacity-8"
-      sx={{ minHeight: "90vh" }}
-    >
+    <CustomContainer>
       {!currentData || currentData?.results?.length === 0 ? (
         <CircularLoading />
       ) : (
         <Grid container columnSpacing={3}>
+          <Grid item xs={12} sm={12} md={12}>
+            {slug === "popular" && (
+              <Typography className="mb-5 text-2xl font-semibold">
+                Popular Movies
+              </Typography>
+            )}
+            {slug === "now-playing" && (
+              <Typography className="mb-5 text-2xl font-semibold">
+                Now Playing Movies
+              </Typography>
+            )}
+            {slug === "upcoming" && (
+              <Typography className="mb-5 text-2xl font-semibold">
+                Upcoming Movies
+              </Typography>
+            )}
+            {slug === "top-rated" && (
+              <Typography className="mb-5 text-2xl font-semibold">
+                Top Rated Movies
+              </Typography>
+            )}
+          </Grid>
+
           <Grid item xs={12} sm={12} md={3}>
             <ItemFilter
               setLoading={setLoading}
@@ -111,7 +129,7 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
             {loading ? (
               <CircularLoading />
             ) : (
-              <Grid container spacing={4}>
+              <Grid container spacing={3}>
                 {currentData && currentData?.results?.length > 0 && (
                   <>
                     {currentData?.results?.map((item: ItemTypes) => (
@@ -144,7 +162,7 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
           </Grid>
         </Grid>
       )}
-    </Box>
+    </CustomContainer>
   );
 };
 

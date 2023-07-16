@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Grid, Pagination, Box } from "@mui/material";
+import { Grid, Pagination, Box, Container, Typography } from "@mui/material";
 import { UrlConfig } from "@/src/config/UrlConfig";
 import axios from "axios";
 import { ApiService } from "@/src/config/ApiService";
@@ -9,6 +9,7 @@ import ItemCard from "./card/ItemCard";
 import CircularLoading from "../shared/CircularLoading";
 import ItemFilter from "./filter/ItemFilter";
 import { useAppSelector } from "@/src/redux/hooks";
+import CustomContainer from "../shared/CustomContainer";
 
 type TvShowListPropsType = {
   data: any;
@@ -27,15 +28,12 @@ const TvShowList = ({ data, slug }: TvShowListPropsType) => {
   const { filterUrl, isFilterParams } = useAppSelector(
     (state) => state.listingReducer
   );
-  
+
   const [currentData, setCurrentData] = useState<any>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handlePageChange = async (
-    event: any,
-    page: number
-  ) => {
+  const handlePageChange = async (event: any, page: number) => {
     setLoading(true);
 
     window.scrollTo({
@@ -88,14 +86,33 @@ const TvShowList = ({ data, slug }: TvShowListPropsType) => {
   }, [isFilterParams]);
 
   return (
-    <Box
-      className="p-4 sm:p-6 md:p-10 bg-slate-100 bg-opacity-8"
-      sx={{ minHeight: "90vh" }}
-    >
+    <CustomContainer>
       {!currentData || currentData?.results?.length === 0 ? (
         <CircularLoading />
       ) : (
         <Grid container columnSpacing={3}>
+          <Grid item xs={12} sm={12} md={12}>
+            {slug === "popular" && (
+              <Typography className="mb-5 text-2xl font-semibold">
+                Popular TV Shows
+              </Typography>
+            )}
+            {slug === "airing-today" && (
+              <Typography className="mb-5 text-2xl font-semibold">
+                TV Shows Airing Today
+              </Typography>
+            )}
+            {slug === "on-the-air" && (
+              <Typography className="mb-5 text-2xl font-semibold">
+                Currently Airing TV Shows
+              </Typography>
+            )}
+            {slug === "top-rated" && (
+              <Typography className="mb-5 text-2xl font-semibold">
+                Top Rated TV Shows
+              </Typography>
+            )}
+          </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <ItemFilter
               setLoading={setLoading}
@@ -109,7 +126,7 @@ const TvShowList = ({ data, slug }: TvShowListPropsType) => {
             {loading ? (
               <CircularLoading />
             ) : (
-              <Grid container spacing={4}>
+              <Grid container spacing={3}>
                 {currentData && currentData?.results?.length > 0 && (
                   <>
                     {currentData?.results?.map((item: ItemTypes) => (
@@ -142,7 +159,7 @@ const TvShowList = ({ data, slug }: TvShowListPropsType) => {
           </Grid>
         </Grid>
       )}
-    </Box>
+    </CustomContainer>
   );
 };
 
