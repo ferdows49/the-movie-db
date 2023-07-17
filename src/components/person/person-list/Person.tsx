@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import CustomContainer from "@/src/components/shared/CustomContainer";
 import { Grid, Typography, Pagination } from "@mui/material";
-import CircularLoading from "../shared/CircularLoading";
+import CircularLoading from "../../shared/CircularLoading";
 import axios from "axios";
 import { UrlConfig } from "@/src/config/UrlConfig";
 import { ApiService } from "@/src/config/ApiService";
@@ -17,8 +17,6 @@ type ItemTypes = {
 };
 
 const Person = ({ data }: { data: any }) => {
-  console.log("data", data);
-
   const [currentData, setCurrentData] = useState<any>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
@@ -73,6 +71,7 @@ const Person = ({ data }: { data: any }) => {
                     {currentData?.results?.map((item: ItemTypes) => (
                       <PersonCard
                         key={item?.id}
+                        id={item?.id}
                         name={item?.name}
                         knownFor={item?.known_for_department}
                         posterPath={item?.profile_path}

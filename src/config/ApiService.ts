@@ -13,4 +13,6 @@ export const ApiService = {
   FILTER_MOVIES: "/discover/movie",
   FILTER_TV_SHOWS: "/discover/tv",
   GET_POPULAR_PERSON: "/person/popular",
+  GET_PERSON_DETAILS: "/person",
+  GET_COMBINED_CREDITS: "/combined_credits"
 };

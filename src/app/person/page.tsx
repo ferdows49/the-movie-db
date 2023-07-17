@@ -1,7 +1,7 @@
 import { UrlConfig } from "@/src/config/UrlConfig";
 import { ApiService } from "@/src/config/ApiService";
 import axios from "axios";
-import Person from "@/src/components/person/Person";
+import Person from "@/src/components/person/person-list/Person";
 
 const page = async () => {
   const response = await axios.get(
