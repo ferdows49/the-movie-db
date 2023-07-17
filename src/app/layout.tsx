@@ -28,7 +28,7 @@ export default function RootLayout({
         />
         <title>The Movie DB</title>
       </head>
-      <body className={inter.className}>
+      <body>
         <NavBar />
         <Providers>
           <Suspense fallback={<Loading />}>{children}</Suspense>

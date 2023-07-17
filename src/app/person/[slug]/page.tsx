@@ -21,10 +21,28 @@ const PersonDetailsPage = async ({ params: { slug } }: ParamsType) => {
   );
   const combinedCreditsData = await combinedCreditsResponse.data;
 
+  const movieCreditsResponse = await axios.get(
+    `${UrlConfig.BASE_URL}${ApiService.GET_PERSON_DETAILS}/${slug}/${ApiService.GET_MOVIE_CREDITS}?api_key=${UrlConfig.API_KEY}`
+  );
+  const movieCreditsData = await movieCreditsResponse.data;
+
+  const tvCreditsResponse = await axios.get(
+    `${UrlConfig.BASE_URL}${ApiService.GET_PERSON_DETAILS}/${slug}/${ApiService.GET_COMBINED_CREDITS}?api_key=${UrlConfig.API_KEY}`
+  );
+  const tvCreditsData = await tvCreditsResponse.data;
+
+  const externalIdsResponse = await axios.get(
+    `${UrlConfig.BASE_URL}${ApiService.GET_PERSON_DETAILS}/${slug}/${ApiService.GET_EXTERNAL_ID}?api_key=${UrlConfig.API_KEY}`
+  );
+  const externalIdsData = await externalIdsResponse.data;
+
   return (
     <PersonDetails
       personDetailsData={personDetailsData}
       combinedCreditsData={combinedCreditsData}
+      movieCreditsData={movieCreditsData}
+      tvCreditsData={tvCreditsData}
+      externalIdsData={externalIdsData}
     />
   );
 };

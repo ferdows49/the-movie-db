@@ -38,7 +38,7 @@ const PersonHeadingInfo = ({ name, biography }: PropsType) => {
               fontSize: "20px",
               fontWeight: 700,
               width: "100%",
-              height: "28px",
+              height: "32px",
               textAlign: "right",
               backgroundColor: "rgba(255, 255, 255, 0.8)",
               color: "#00B5E7",

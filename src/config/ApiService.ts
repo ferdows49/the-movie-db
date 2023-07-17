@@ -14,5 +14,8 @@ export const ApiService = {
   FILTER_TV_SHOWS: "/discover/tv",
   GET_POPULAR_PERSON: "/person/popular",
   GET_PERSON_DETAILS: "/person",
-  GET_COMBINED_CREDITS: "/combined_credits"
+  GET_COMBINED_CREDITS: "/combined_credits",
+  GET_MOVIE_CREDITS: "/movie_credits",
+  GET_TV_CREDITS: "/tv_credits",
+  GET_EXTERNAL_ID: "/external_ids",
 };

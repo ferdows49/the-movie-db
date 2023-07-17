@@ -14,6 +14,12 @@ type PropsType = {
     name: string;
     biography: string;
     profile_path: string;
+    known_for_department: string;
+    popularity: number;
+    birthday: string;
+    gender: number;
+    place_of_birth: string;
+    also_known_as: string[];
   };
   combinedCreditsData: {
     cast: {
@@ -24,13 +30,26 @@ type PropsType = {
       name: string;
     }[];
   };
+  externalIdsData: {
+    facebook_id: "string" | null;
+    instagram_id: "string" | null;
+    twitter_id: "string" | null;
+    youtube_id: "string" | null;
+  };
+  movieCreditsData: any;
+  tvCreditsData: any;
 };
 
 const PersonDetails = ({
   personDetailsData,
   combinedCreditsData,
+  movieCreditsData,
+  tvCreditsData,
+  externalIdsData,
 }: PropsType) => {
   console.log("combinedCreditsData", combinedCreditsData);
+  console.log("movieCreditsData", movieCreditsData);
+  console.log("tvCreditsData", tvCreditsData);
 
   const [value, setValue] = useState("1");
 
@@ -60,10 +79,11 @@ const PersonDetails = ({
             <TabPanel value="1">
               <PersonOverview
                 key={personDetailsData?.id}
-                name={personDetailsData?.name}
-                biography={personDetailsData?.biography}
-                posterPath={personDetailsData?.profile_path}
+                personDetailsData={personDetailsData}
                 combinedCreditsData={combinedCreditsData}
+                movieCreditsData={movieCreditsData}
+                tvCreditsData={tvCreditsData}
+                externalIdsData={externalIdsData}
               />
             </TabPanel>
             <TabPanel value="2">Item Two</TabPanel>
