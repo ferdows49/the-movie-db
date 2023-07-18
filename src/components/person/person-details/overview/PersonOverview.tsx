@@ -23,9 +23,16 @@ type PropsType = {
     cast: {
       id: number;
       title: string;
+      original_title: string;
       poster_path: string;
       popularity: number;
       name: string;
+      original_name: string;
+      release_date: string;
+      episode_count: number;
+      character: string;
+      overview: string;
+      vote_average: number;
     }[];
   };
   externalIdsData: {
