@@ -13,7 +13,17 @@ const PersonHeadingInfo = ({ name, biography }: PropsType) => {
   return (
     <>
       <Typography
-        sx={{ fontSize: "35px", fontWeight: 700, marginBottom: "30px" }}
+        sx={{
+          fontSize: "35px",
+          fontWeight: 700,
+          marginBottom: "30px",
+          display: {
+            xs: "none",
+            sm: "none",
+            md: "flex",
+            lg: "flex",
+          },
+        }}
       >
         {name}
       </Typography>

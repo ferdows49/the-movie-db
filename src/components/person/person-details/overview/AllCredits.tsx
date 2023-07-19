@@ -51,14 +51,14 @@ const AllCredits = ({
 }: PropsType) => {
   return (
     <Grid container sx={{ marginTop: "30px" }}>
-      <Grid item md={12}>
+      <Grid item xs={12} sm={12} md={12}>
         <Typography
           sx={{ fontSize: "20px", fontWeight: 600, marginBottom: "10px" }}
         >
           Acting
         </Typography>
       </Grid>
-      <Grid item md={12}>
+      <Grid item xs={12} sm={12} md={12}>
         {combinedCreditsData &&
           combinedCreditsData?.cast?.length > 0 &&
           combinedCreditsData?.cast
@@ -76,31 +76,42 @@ const AllCredits = ({
                         <Typography sx={{ fontSize: "16px", fontWeight: 300 }}>
                           {item?.release_date?.split("-")[0]}
                         </Typography>
-                        <CustomTooltip
-                          title={<CreditMore data={item} />}
-                          componentsProps={{
-                            tooltip: {
-                              sx: {
-                                fontSize: "16px",
-                                fontWeight: 300,
-                                bgcolor: "#032541",
-                                "& .MuiTooltip-arrow": {
-                                  color: "#032541",
-                                },
-                              },
+                        <Box
+                          sx={{
+                            display: {
+                              xs: "none",
+                              sm: "flex",
+                              md: "flex",
+                              lg: "flex",
                             },
                           }}
                         >
-                          <LoupeIcon
-                            sx={{
-                              fontSize: 20,
-                              marginRight: "20px",
-                              marginLeft: "20px",
-                              cursor: "pointer",
+                          <CustomTooltip
+                            title={<CreditMore data={item} />}
+                            componentsProps={{
+                              tooltip: {
+                                sx: {
+                                  fontSize: "16px",
+                                  fontWeight: 300,
+                                  bgcolor: "#032541",
+                                  "& .MuiTooltip-arrow": {
+                                    color: "#032541",
+                                  },
+                                },
+                              },
                             }}
-                          />
-                        </CustomTooltip>
-                        <Box>
+                          >
+                            <LoupeIcon
+                              sx={{
+                                fontSize: 20,
+                                marginLeft: "20px",
+                                cursor: "pointer",
+                              }}
+                            />
+                          </CustomTooltip>
+                        </Box>
+
+                        <Box sx={{ marginLeft: "20px" }}>
                           <Typography sx={{ fontWeight: 600 }}>
                             <Link href="/">{item?.title}</Link>
                           </Typography>

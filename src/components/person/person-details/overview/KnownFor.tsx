@@ -33,7 +33,6 @@ type knownForItem = {
 
 const KnownFor = ({ combinedCreditsData }: PropsType) => {
   const [knownFor, setKnownFor] = useState<any>([]);
-  console.log("knownFor", knownFor);
 
   useEffect(() => {
     const personKnownFor =

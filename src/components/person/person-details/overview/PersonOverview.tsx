@@ -53,26 +53,35 @@ const PersonOverview = ({
   externalIdsData,
 }: PropsType) => {
   return (
-    <Grid container columnSpacing={4}>
-      <Grid item md={3}>
+    <Grid
+      container
+      columnSpacing={4}
+      sx={{
+        justifyContent: {
+          xs: "center",
+          sm: "center",
+        },
+      }}
+    >
+      <Grid item xs={12} sm={12} md={3}>
         <PersonalInfo
           knownCredits={combinedCreditsData?.cast?.length}
           personDetailsData={personDetailsData}
           externalIdsData={externalIdsData}
         />
       </Grid>
-      <Grid item md={9}>
+      <Grid item xs={12} sm={12} md={9}>
         <Grid container>
-          <Grid item md={12}>
+          <Grid item xs={12} sm={12} md={12}>
             <PersonHeadingInfo
               name={personDetailsData?.name}
               biography={personDetailsData?.biography}
             />
           </Grid>
-          <Grid item md={12}>
+          <Grid item xs={12} sm={12} md={12}>
             <KnownFor combinedCreditsData={combinedCreditsData} />
           </Grid>
-          <Grid item md={12}>
+          <Grid item xs={12} sm={12} md={12}>
             <AllCredits
               combinedCreditsData={combinedCreditsData}
               movieCreditsData={movieCreditsData}

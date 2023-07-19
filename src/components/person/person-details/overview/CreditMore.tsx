@@ -35,7 +35,7 @@ type PropsType = {
 const CreditMore = ({ data }: PropsType) => {
   return (
     <Grid container columnSpacing={3} sx={{ padding: "10px" }}>
-      <Grid item md={3}>
+      <Grid item sm={3} md={3}>
         <Card sx={{ borderRadius: "6px" }}>
           <CardActionArea>
             {data?.poster_path ? (
@@ -58,7 +58,7 @@ const CreditMore = ({ data }: PropsType) => {
           </CardActionArea>
         </Card>
       </Grid>
-      <Grid item md={9}>
+      <Grid item sm={9} md={9}>
         <Box
           sx={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
         >

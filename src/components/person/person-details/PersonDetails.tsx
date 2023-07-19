@@ -7,6 +7,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import PersonOverview from "./overview/PersonOverview";
+import PersonMedia from "./media/PersonMedia";
 
 type PropsType = {
   personDetailsData: {
@@ -45,6 +46,17 @@ type PropsType = {
   };
   movieCreditsData: any;
   tvCreditsData: any;
+  personImageData: {
+    id: number;
+    profiles: {
+      aspect_ratio: number;
+      file_path: string;
+      height: number;
+      vote_average: number;
+      vote_count: number;
+      width: number;
+    }[];
+  };
 };
 
 const PersonDetails = ({
@@ -53,10 +65,12 @@ const PersonDetails = ({
   movieCreditsData,
   tvCreditsData,
   externalIdsData,
+  personImageData,
 }: PropsType) => {
-  console.log("combinedCreditsData", combinedCreditsData);
-  console.log("movieCreditsData", movieCreditsData);
-  console.log("tvCreditsData", tvCreditsData);
+  // console.log("combinedCreditsData", combinedCreditsData);
+  // console.log("movieCreditsData", movieCreditsData);
+  // console.log("tvCreditsData", tvCreditsData);
+  console.log("personImageData", personImageData);
 
   const [value, setValue] = useState("1");
 
@@ -67,7 +81,7 @@ const PersonDetails = ({
   return (
     <CustomContainer>
       <Grid container>
-        <Grid item md={12}>
+        <Grid item xs={12} sm={12} md={12}>
           <TabContext value={value}>
             <Box
               sx={{
@@ -83,7 +97,7 @@ const PersonDetails = ({
                 <Tab label="Media" value="2" />
               </TabList>
             </Box>
-            <TabPanel value="1">
+            <TabPanel value="1" sx={{ paddingRight: 0, paddingLeft: 0 }}>
               <PersonOverview
                 key={personDetailsData?.id}
                 personDetailsData={personDetailsData}
@@ -93,7 +107,13 @@ const PersonDetails = ({
                 externalIdsData={externalIdsData}
               />
             </TabPanel>
-            <TabPanel value="2">Item Two</TabPanel>
+            <TabPanel value="2" sx={{ paddingRight: 0, paddingLeft: 0 }}>
+              <PersonMedia
+                personImageData={personImageData}
+                handleChange={handleChange}
+                name={personDetailsData?.name}
+              />
+            </TabPanel>
           </TabContext>
         </Grid>
       </Grid>

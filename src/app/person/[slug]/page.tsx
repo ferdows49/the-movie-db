@@ -36,6 +36,11 @@ const PersonDetailsPage = async ({ params: { slug } }: ParamsType) => {
   );
   const externalIdsData = await externalIdsResponse.data;
 
+  const personImageResponse = await axios.get(
+    `${UrlConfig.BASE_URL}${ApiService.GET_PERSON_DETAILS}/${slug}/${ApiService.GET_PERSONAL_IMAGES}?api_key=${UrlConfig.API_KEY}`
+  );
+  const personImageData = await personImageResponse.data;
+
   return (
     <PersonDetails
       personDetailsData={personDetailsData}
@@ -43,6 +48,7 @@ const PersonDetailsPage = async ({ params: { slug } }: ParamsType) => {
       movieCreditsData={movieCreditsData}
       tvCreditsData={tvCreditsData}
       externalIdsData={externalIdsData}
+      personImageData={personImageData}
     />
   );
 };
