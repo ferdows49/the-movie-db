@@ -145,16 +145,6 @@ const NavBar = () => {
         <Toolbar disableGutters>
           <Box
             sx={{
-              display: { xs: "none", md: "flex" },
-              paddingRight: "20px",
-              cursor: "pointer",
-            }}
-          >
-            <Image src={TmdbIcon} alt="" width={154} />
-          </Box>
-
-          <Box
-            sx={{
               flexGrow: 1,
               display: { xs: "flex", sm: "flex", md: "none" },
             }}
@@ -275,6 +265,18 @@ const NavBar = () => {
             </Menu>
           </Box>
 
+          <Box
+            sx={{
+              // display: { xs: "none", md: "flex" },
+              paddingRight: "20px",
+              cursor: "pointer",
+            }}
+          >
+            <Link href="/">
+              <Image src={TmdbIcon} alt="" width={154} />
+            </Link>
+          </Box>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Box>
               <Button
@@ -373,15 +375,26 @@ const NavBar = () => {
             </Box>
           </Box>
 
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                sm: "flex",
+                md: "flex",
+                lg: "flex",
+              },
+            }}
+          >
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </Box>
 
           <Box sx={{ flexGrow: 0, marginLeft: "20px" }}>
             <Tooltip title="Open settings">

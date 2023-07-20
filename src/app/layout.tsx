@@ -1,11 +1,12 @@
 import "../styles/globals.css";
-import { Inter } from "next/font/google";
-import React, {Suspense} from "react";
+import { Source_Sans_3 } from "next/font/google";
+import React, { Suspense } from "react";
 import NavBar from "@/src/components/shared/NavBar";
 import { Providers } from "../redux/Provider";
 import Loading from "./loading";
+import Footer from "../components/shared/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const source_Sans_3 = Source_Sans_3({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -26,12 +27,17 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet"
+        />
         <title>The Movie DB</title>
       </head>
-      <body>
-        <NavBar />
+      <body className={source_Sans_3.className}>
         <Providers>
+          <NavBar />
           <Suspense fallback={<Loading />}>{children}</Suspense>
+          <Footer />
         </Providers>
       </body>
     </html>
