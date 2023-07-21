@@ -19,4 +19,5 @@ export const ApiService = {
   GET_TV_CREDITS: "/tv_credits",
   GET_EXTERNAL_ID: "/external_ids",
   GET_PERSONAL_IMAGES: "/images",
+  GET_ALL_TRENDING: "/trending/all",
 };

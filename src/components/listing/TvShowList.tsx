@@ -1,11 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Grid, Pagination, Box, Container, Typography } from "@mui/material";
+import {
+  Grid,
+  Pagination,
+  Box,
+  Container,
+  Typography,
+  Card,
+} from "@mui/material";
 import { UrlConfig } from "@/src/config/UrlConfig";
 import axios from "axios";
 import { ApiService } from "@/src/config/ApiService";
-import ItemCard from "./card/ItemCard";
+import ItemCard from "../shared/card/ItemCard";
 import CircularLoading from "../shared/CircularLoading";
 import ItemFilter from "./filter/ItemFilter";
 import { useAppSelector } from "@/src/redux/hooks";
@@ -130,13 +137,18 @@ const TvShowList = ({ data, slug }: TvShowListPropsType) => {
                 {currentData && currentData?.results?.length > 0 && (
                   <>
                     {currentData?.results?.map((item: ItemTypes) => (
-                      <ItemCard
-                        key={item?.id}
-                        title={item?.name}
-                        posterPath={item?.poster_path}
-                        releaseDate={item?.first_air_date}
-                        voteAverage={item?.vote_average}
-                      />
+                      <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Card className="rounded-lg shadow-md">
+                          <ItemCard
+                            key={item?.id}
+                            title={item?.name}
+                            posterPath={item?.poster_path}
+                            releaseDate={item?.first_air_date}
+                            voteAverage={item?.vote_average}
+                            roundedImage={false}
+                          />
+                        </Card>
+                      </Grid>
                     ))}
                     <Grid
                       item

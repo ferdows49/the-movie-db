@@ -56,6 +56,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           About TMDB
@@ -66,6 +67,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           About TMDB
@@ -76,6 +78,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Support Forums
@@ -86,6 +89,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           API
@@ -96,6 +100,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           System Status
@@ -118,6 +123,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Contribution Bible
@@ -128,6 +134,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Add New Movie
@@ -138,6 +145,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Add New TV Show
@@ -166,6 +174,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Guidelines
@@ -176,6 +185,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Discussions
@@ -186,6 +196,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Leaderboard
@@ -196,6 +207,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Twitter
@@ -224,6 +236,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Terms of Use
@@ -234,6 +247,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           API Terms of Use
@@ -244,6 +258,7 @@ const Footer = () => {
             fontWeight: 400,
             lineHeight: "23px",
             marginBottom: "4px",
+            cursor: "pointer"
           }}
         >
           Privacy Policy
