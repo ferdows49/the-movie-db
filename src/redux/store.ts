@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { movieApi } from "./listing/movieApi";
 import listingReducer from "./listing/listingSlice";
+import searchReducer from "./search/searchSlich";
 
 export const store = configureStore({
   reducer: {
     listingReducer,
+    searchReducer,
     [movieApi.reducerPath]: movieApi.reducer,
   },
   devTools: true,

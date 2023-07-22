@@ -58,7 +58,7 @@ const Trending = ({ trendingAllData }: PropsType) => {
       sx={{
         position: "relative",
         display: "flex",
-        height: "450px",
+        height: "474px",
       }}
     >
       <Box
@@ -81,11 +81,17 @@ const Trending = ({ trendingAllData }: PropsType) => {
           className="h-full w-full object-cover"
         />
       </Box>
-      <Container maxWidth="lg" sx={{ zIndex: 1 }}>
+      <Container maxWidth="xl" sx={{ zIndex: 1 }}>
         <Grid container>
           <Grid item xs={12} sm={12} md={12}>
             <TitleWithButton
               title="Trending"
+              titleColor="#000000"
+              buttonColorActive="#39DBAF"
+              buttonColorInActive="#032541"
+              buttonBorderColor="#032541"
+              buttonBgColorActive="#032541"
+              buttonBgColorInActive="rgba(0, 0, 0, 0)"
               buttonType={trendingType}
               setButtonType={setTrendingType}
               leftButtonName="Today"

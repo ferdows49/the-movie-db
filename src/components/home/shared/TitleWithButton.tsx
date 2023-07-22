@@ -3,23 +3,36 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 
 type PropsType = {
   title: string;
+  titleColor: string;
   buttonType: string;
   setButtonType: React.Dispatch<React.SetStateAction<string>>;
   leftButtonName: string;
   rightButtonName: string;
+  buttonColorActive: string;
+  buttonColorInActive: string;
+  buttonBgColorActive: string;
+  buttonBgColorInActive: string;
+  buttonBorderColor: string;
 };
 
 const TitleWithButton = ({
   title,
+  titleColor,
   buttonType,
   leftButtonName,
   rightButtonName,
   setButtonType,
+  buttonColorActive,
+  buttonColorInActive,
+  buttonBgColorActive,
+  buttonBgColorInActive,
+  buttonBorderColor,
 }: PropsType) => {
   return (
-    <Box sx={{display: "flex", paddingY: "30px"}}>
+    <Box sx={{ display: "flex", paddingY: "30px" }}>
       <Typography
         sx={{
+          color: titleColor,
           fontSize: "24px",
           fontWeight: 600,
           marginRight: "20px",
@@ -30,7 +43,7 @@ const TitleWithButton = ({
       </Typography>
       <Box
         sx={{
-          border: "1px solid #03243f",
+          border: `1px solid ${buttonBorderColor}`,
           borderRadius: "20px",
         }}
       >
@@ -38,11 +51,15 @@ const TitleWithButton = ({
           sx={{
             borderRadius: "20px",
             paddingX: "12px",
-            color: buttonType === leftButtonName ? "#FFFFFF" : "#000000",
+            fontWeight: 500,
+            color:
+              buttonType === leftButtonName
+                ? buttonColorActive
+                : buttonColorInActive,
             backgroundColor:
               buttonType === leftButtonName
-                ? "#03243f !important"
-                : "#FFFFFF !important",
+                ? `${buttonBgColorActive} !important`
+                : `${buttonBgColorInActive} !important`,
 
             textTransform: "capitalize",
           }}
@@ -54,11 +71,15 @@ const TitleWithButton = ({
           sx={{
             borderRadius: "20px",
             paddingX: "12px",
-            color: buttonType === rightButtonName ? "#FFFFFF" : "#000000",
+            fontWeight: 500,
+            color:
+              buttonType === rightButtonName
+                ? buttonColorActive
+                : buttonColorInActive,
             backgroundColor:
               buttonType === rightButtonName
-                ? "#03243f !important"
-                : "#FFFFFF !important",
+                ? `${buttonBgColorActive} !important`
+                : `${buttonBgColorInActive} !important`,
             textTransform: "capitalize",
           }}
           onClick={() => setButtonType(rightButtonName)}

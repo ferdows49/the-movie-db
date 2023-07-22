@@ -16,6 +16,7 @@ type ItemCardPropsType = {
   releaseDate: Date | string;
   roundedImage: boolean;
   fromHome?: boolean;
+  textWhite?: boolean;
 };
 
 const ItemCard = ({
@@ -25,12 +26,13 @@ const ItemCard = ({
   releaseDate,
   roundedImage,
   fromHome = false,
+  textWhite = false,
 }: ItemCardPropsType) => {
   return (
     <>
       <Box
         className="relative"
-        sx={{ height: `${fromHome ? "206px" : "320px"}`, minWidth: "150px" }}
+        sx={{ height: `${fromHome ? "230px" : "320px"}`, minWidth: "150px" }}
       >
         <Link href="/">
           {posterPath ? (
@@ -65,7 +67,9 @@ const ItemCard = ({
       <Box className="pt-7 px-4 !pb-4 h-32 min-h-full">
         <Link href="/">
           <Typography
-            className="text-base font-bold text-black cursor-pointer"
+            className={`text-base font-bold ${
+              textWhite ? "text-white" : "text-black"
+            } cursor-pointer`}
             variant="h5"
             component="div"
           >
@@ -77,7 +81,9 @@ const ItemCard = ({
 
         {releaseDate && (
           <Typography
-            className="text-base font-normal text-black opacity-60 mb-0"
+            className={`text-base font-normal ${
+              textWhite ? "text-white" : "text-black opacity-60"
+            } mb-0`}
             gutterBottom
             variant="h5"
             component="div"

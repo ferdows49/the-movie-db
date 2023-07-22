@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import BannerImage from "../../assets/images/banner.jpg";
 import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Banner = () => {
+  const router = useRouter();
+
+  const [searchBy, setSearchBy] = useState<string>();
+
   return (
     <Box
       sx={{
@@ -73,10 +78,14 @@ const Banner = () => {
         <Box className="relative">
           <input
             type="text"
-            placeholder="Search..."
-            className="w-full rounded-full pl-6 pr-28 py-3 focus:border-none focus:ring-0 outline-none text-lg text-gray-700"
+            placeholder="Search for a movie, tv show, person..."
+            className="w-full rounded-full pl-6 pr-28 py-2.5 focus:border-none focus:ring-0 outline-none text-lg text-gray-700"
+            onChange={(e) => setSearchBy(e.target.value)}
           />
-          <button className="px-4 sm:px-7 py-3 text-white rounded-full bg-cyan-500 border-none absolute top-0 right-0 font-bold text-lg">
+          <button
+            onClick={() => router.push(`/search/${searchBy}`)}
+            className="px-4 sm:px-7 py-2.5 text-white rounded-full bg-cyan-500 border-none absolute top-0 right-0 font-bold text-lg"
+          >
             Search
           </button>
         </Box>
