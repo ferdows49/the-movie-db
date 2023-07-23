@@ -10,7 +10,7 @@ export default async function Page() {
   const trendingAllData = await trendingAllResponse.data;
 
   const latestMovieResponse = await axios.get(
-    `${UrlConfig.BASE_URL}${ApiService.GET_LATEST_MOVIE}?api_key=${UrlConfig.API_KEY}`
+    `${UrlConfig.BASE_URL}${ApiService.GET_LATEST_MOVIES}?api_key=${UrlConfig.API_KEY}`
   );
   const latestMovieData = await latestMovieResponse.data;
 

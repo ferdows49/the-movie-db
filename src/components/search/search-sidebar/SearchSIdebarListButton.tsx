@@ -1,42 +1,43 @@
 import React from "react";
 import { Chip, ListItemButton, Typography } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { setSearchResultBy } from "@/src/redux/search/searchSlich";
 
 type PropsType = {
   title: string;
   resultNumber: number;
-  selectedIndex: number;
-  handleListItemClick: (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
-  ) => void;
   indexNumber: number;
 };
 
 const SearchSIdebarListButton = ({
   title,
   resultNumber,
-  selectedIndex,
-  handleListItemClick,
   indexNumber,
 }: PropsType) => {
+  const searchResultBy: number = useAppSelector(
+    (state) => state.searchReducer.searchResultBy
+  );
+
+  const dispatch = useAppDispatch();
+  
   return (
     <ListItemButton
       sx={{
         backgroundColor:
-          selectedIndex === indexNumber ? "#EBEBEB !important" : "transparent",
-        fontWeight: selectedIndex === indexNumber ? 600 : 400,
+          searchResultBy === indexNumber ? "#EBEBEB !important" : "transparent",
+        fontWeight: searchResultBy === indexNumber ? 600 : 400,
         "&:hover": {
           backgroundColor: "#EBEBEB !important",
         },
         display: "flex",
         justifyContent: "space-between",
       }}
-      selected={selectedIndex === indexNumber}
-      onClick={(event) => handleListItemClick(event, indexNumber)}
+      selected={searchResultBy === indexNumber}
+      onClick={() => dispatch(setSearchResultBy(indexNumber))}
     >
       <Typography
         sx={{
-          fontWeight: selectedIndex === indexNumber ? 600 : 400,
+          fontWeight: searchResultBy === indexNumber ? 600 : 400,
         }}
       >
         {title}

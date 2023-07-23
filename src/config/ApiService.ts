@@ -20,6 +20,11 @@ export const ApiService = {
   GET_EXTERNAL_ID: "/external_ids",
   GET_PERSONAL_IMAGES: "/images",
   GET_ALL_TRENDING: "/trending/all",
-  GET_LATEST_MOVIE: "/movie/latest",
-  GET_SEARCH_MOVIE: "/search/movie",
+  GET_LATEST_MOVIES: "/movie/latest",
+  GET_SEARCH_MOVIES: "/search/movie",
+  GET_SEARCH_TV_SHOWS: "/search/tv",
+  GET_SEARCH_PEOPLE: "/search/person",
+  GET_SEARCH_COLLECTIONS: "/search/collection",
+  GET_SEARCH_KEYWORDS: "/search/keyword",
+  GET_SEARCH_COMPANIES: "/search/company"
 };

@@ -81,9 +81,17 @@ const Banner = () => {
             placeholder="Search for a movie, tv show, person..."
             className="w-full rounded-full pl-6 pr-28 py-2.5 focus:border-none focus:ring-0 outline-none text-lg text-gray-700"
             onChange={(e) => setSearchBy(e.target.value)}
+            onKeyPress={(event: any) => {
+              if (event.key === "Enter") {
+                const searchValue = event.target.value.trim();
+                if (searchValue) {
+                  router.push(`/search/${event?.target?.value}`);
+                }
+              }
+            }}
           />
           <button
-            onClick={() => router.push(`/search/${searchBy}`)}
+            onClick={() => searchBy && router.push(`/search/${searchBy}`)}
             className="px-4 sm:px-7 py-2.5 text-white rounded-full bg-cyan-500 border-none absolute top-0 right-0 font-bold text-lg"
           >
             Search

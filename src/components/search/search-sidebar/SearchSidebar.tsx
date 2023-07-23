@@ -1,25 +1,24 @@
 import React from "react";
-import { Card, Chip, List, ListItemButton, Typography } from "@mui/material";
+import { Card, List, Typography } from "@mui/material";
 import SearchSIdebarListButton from "./SearchSIdebarListButton";
-import { useAppDispatch } from "@/src/redux/hooks";
-import { setSearchResultBy } from "@/src/redux/search/searchSlich";
 
 type PropsType = {
-  resultNumber: number;
+  searchMovieTotalResults: number;
+  searchTvShowTotalResults: number;
+  searchCollectionTotalResults: number;
+  searchCompanyTotalResults: number;
+  searchKeywordTotalResults: number;
+  searchPeopleTotalResults: number;
 };
 
-const SearchSidebar = ({resultNumber}: PropsType) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-  const dispatch = useAppDispatch();
-
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
-  ) => {
-    dispatch(setSearchResultBy(index));
-    setSelectedIndex(index);
-  };
+const SearchSidebar = ({
+  searchMovieTotalResults,
+  searchTvShowTotalResults,
+  searchCollectionTotalResults,
+  searchCompanyTotalResults,
+  searchKeywordTotalResults,
+  searchPeopleTotalResults,
+}: PropsType) => {
 
   return (
     <Card sx={{ borderRadius: "8px" }}>
@@ -46,57 +45,37 @@ const SearchSidebar = ({resultNumber}: PropsType) => {
         <SearchSIdebarListButton
           title="Movie"
           indexNumber={1}
-          resultNumber={resultNumber}
-          selectedIndex={selectedIndex}
-          handleListItemClick={handleListItemClick}
+          resultNumber={searchMovieTotalResults}
         />
 
         <SearchSIdebarListButton
           title="People"
           indexNumber={2}
-          resultNumber={resultNumber}
-          selectedIndex={selectedIndex}
-          handleListItemClick={handleListItemClick}
+          resultNumber={searchPeopleTotalResults}
         />
 
         <SearchSIdebarListButton
           title="TV Shows"
           indexNumber={3}
-          resultNumber={resultNumber}
-          selectedIndex={selectedIndex}
-          handleListItemClick={handleListItemClick}
+          resultNumber={searchTvShowTotalResults}
         />
 
         <SearchSIdebarListButton
           title="Collections"
           indexNumber={4}
-          resultNumber={resultNumber}
-          selectedIndex={selectedIndex}
-          handleListItemClick={handleListItemClick}
+          resultNumber={searchCollectionTotalResults}
         />
 
         <SearchSIdebarListButton
           title="Companies"
           indexNumber={5}
-          resultNumber={resultNumber}
-          selectedIndex={selectedIndex}
-          handleListItemClick={handleListItemClick}
+          resultNumber={searchCompanyTotalResults}
         />
 
         <SearchSIdebarListButton
           title="Keywords"
           indexNumber={6}
-          resultNumber={resultNumber}
-          selectedIndex={selectedIndex}
-          handleListItemClick={handleListItemClick}
-        />
-
-        <SearchSIdebarListButton
-          title="Networks"
-          indexNumber={7}
-          resultNumber={resultNumber}
-          selectedIndex={selectedIndex}
-          handleListItemClick={handleListItemClick}
+          resultNumber={searchKeywordTotalResults}
         />
       </List>
     </Card>

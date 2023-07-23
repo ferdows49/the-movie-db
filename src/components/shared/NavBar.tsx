@@ -25,8 +25,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import { useRouter } from "next/navigation";
 
-const pages = ["Movies", "Tv Shows", "People"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
@@ -72,6 +72,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
+  const router = useRouter();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -392,6 +394,14 @@ const NavBar = () => {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
+                onKeyPress={(event: any) => {
+                  if (event.key === "Enter") {
+                    const searchValue = event.target.value.trim();
+                    if (searchValue) {
+                      router.push(`/search/${event?.target?.value}`);
+                    }
+                  }
+                }}
               />
             </Search>
           </Box>
