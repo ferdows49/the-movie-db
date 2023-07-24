@@ -11,7 +11,6 @@ import Image from "next/image";
 import Link from "next/link";
 import NotFoundImage from "../../../assets/images/not-found-image.svg";
 import { UrlConfig } from "@/src/config/UrlConfig";
-import AdjustIcon from "@mui/icons-material/Adjust";
 
 type PropsType = {
   companyData: {
@@ -73,7 +72,7 @@ const SearchCompanies = ({
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "start",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
                     <Typography
@@ -83,7 +82,7 @@ const SearchCompanies = ({
                       sx={{
                         fontSize: "20px",
                         lineHeight: "24px",
-                        marginRight: "10px"
+                        marginRight: "10px",
                       }}
                     >
                       {item?.name}
@@ -91,7 +90,11 @@ const SearchCompanies = ({
                     {item?.origin_country && (
                       <Chip
                         label={item?.origin_country}
-                        sx={{ borderRadius: "8px" }}
+                        sx={{
+                          borderRadius: "8px",
+                          color: "#FFFFFF",
+                          fontWeight: 500,
+                        }}
                         size="small"
                       />
                     )}
