@@ -123,6 +123,8 @@ const Trending = ({ trendingAllData }: PropsType) => {
                   <Grid item>
                     <ItemCard
                       key={item?.id}
+                      id={item?.id}
+                      mediaType={item?.media_type}
                       title={item?.title || item?.name}
                       posterPath={item?.poster_path}
                       releaseDate={item?.release_date || item?.first_air_date}

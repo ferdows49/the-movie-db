@@ -10,6 +10,8 @@ import Rating from "./Rating";
 import NotFoundImage from "../../../assets/images/not-found-image.svg";
 
 type ItemCardPropsType = {
+  id: number;
+  mediaType: string;
   posterPath: string;
   voteAverage: number;
   title: string;
@@ -20,9 +22,11 @@ type ItemCardPropsType = {
 };
 
 const ItemCard = ({
+  id,
+  title,
+  mediaType,
   posterPath,
   voteAverage,
-  title,
   releaseDate,
   roundedImage,
   fromHome = false,
@@ -34,7 +38,7 @@ const ItemCard = ({
         className="relative"
         sx={{ height: `${fromHome ? "230px" : "320px"}`, minWidth: "150px" }}
       >
-        <Link href="/">
+        <Link href={`${mediaType === "movie" ? `/movie/${id}` : `/tv/${id}`}`}>
           {posterPath ? (
             <Image
               width={500}
@@ -65,7 +69,7 @@ const ItemCard = ({
         </Box>
       </Box>
       <Box className="pt-7 px-4 !pb-4 h-32 min-h-full">
-        <Link href="/">
+        <Link href={`${mediaType === "movie" ? `/movie/${id}` : `/tv/${id}`}`}>
           <Typography
             className={`text-base font-bold ${
               textWhite ? "text-white" : "text-black"

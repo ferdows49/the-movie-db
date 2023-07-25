@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import {
   Grid,
   Pagination,
-  Box,
-  Container,
   Typography,
   Card,
 } from "@mui/material";
@@ -24,10 +22,11 @@ type TvShowListPropsType = {
 };
 
 type ItemTypes = {
+  id: number;
+  name: string;
+  media_type: string;
   vote_average: number;
   first_air_date: Date | string;
-  name: string;
-  id: number;
   poster_path: string;
 };
 
@@ -141,6 +140,8 @@ const TvShowList = ({ data, slug }: TvShowListPropsType) => {
                         <Card className="rounded-lg shadow-md">
                           <ItemCard
                             key={item?.id}
+                            id={item?.id}
+                            mediaType={item?.media_type}
                             title={item?.name}
                             posterPath={item?.poster_path}
                             releaseDate={item?.first_air_date}

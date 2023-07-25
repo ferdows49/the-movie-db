@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import MediaNav from "./MediaNav";
 
 const MovieDetails = () => {
-  return <div>MovieDetails</div>;
+  return <MediaNav />;
 };
 
 export default MovieDetails;

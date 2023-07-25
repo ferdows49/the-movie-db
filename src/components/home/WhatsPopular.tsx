@@ -104,6 +104,8 @@ const WhatsPopular = ({ whatsPopularData }: PropsType) => {
                     <Grid item>
                       <ItemCard
                         key={item?.id}
+                        id={item?.id}
+                        mediaType={item?.media_type}
                         textWhite={true}
                         title={item?.title || item?.name}
                         posterPath={item?.poster_path}

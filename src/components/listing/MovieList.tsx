@@ -17,12 +17,13 @@ type MovieListPropsType = {
 };
 
 type ItemTypes = {
+  id: number;
+  title: string;
+  name?: string;
+  media_type: string;
   vote_average: number;
   release_date: Date | string;
   first_air_date: Date | string;
-  title: string;
-  name?: string;
-  id: number;
   poster_path: string;
 };
 
@@ -137,6 +138,8 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
                         <Card className="rounded-lg shadow-md">
                           <ItemCard
                             key={item?.id}
+                            id={item?.id}
+                            mediaType={item?.media_type}
                             title={item?.title}
                             posterPath={item?.poster_path}
                             releaseDate={item?.release_date}

@@ -11,14 +11,14 @@ import { UrlConfig } from "@/src/config/UrlConfig";
 import Link from "next/link";
 import PersonImageNotFound from "../../../assets/images/person-image-not found.svg";
 
-type ItemCardPropsType = {
+type PersonPropsType = {
   id: number;
   name: string;
   knownFor: string;
   posterPath: string;
 };
 
-const PersonCard = ({ id, name, knownFor, posterPath }: ItemCardPropsType) => {
+const PersonCard = ({ id, name, knownFor, posterPath }: PersonPropsType) => {
   return (
     <Grid item xs={12} sm={6} md={2.4} lg={2.4}>
       <Link href={`/person/${id}`}>
