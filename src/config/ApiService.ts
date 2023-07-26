@@ -26,5 +26,6 @@ export const ApiService = {
   GET_SEARCH_PEOPLE: "/search/person",
   GET_SEARCH_COLLECTIONS: "/search/collection",
   GET_SEARCH_KEYWORDS: "/search/keyword",
-  GET_SEARCH_COMPANIES: "/search/company"
+  GET_SEARCH_COMPANIES: "/search/company",
+  GET_MOVIE_DETAILS: "/movie",
 };
