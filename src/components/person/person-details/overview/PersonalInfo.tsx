@@ -3,12 +3,7 @@ import { Box, Typography, Card, CardActionArea, Grid } from "@mui/material";
 import Image from "next/image";
 import PersonImageNotFound from "../../../../assets/images/person-image-not found.svg";
 import { UrlConfig } from "@/src/config/UrlConfig";
-import Link from "next/link";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import CustomTooltip from "@/src/components/shared/CustomTooltip";
+import SocialMediaLink from "@/src/components/shared/SocialMediaLink";
 
 type PropsType = {
   personDetailsData: {
@@ -22,6 +17,7 @@ type PropsType = {
     gender: number;
     place_of_birth: string;
     also_known_as: string[];
+    homepage: string;
   };
   externalIdsData: {
     facebook_id: "string" | null;
@@ -47,6 +43,9 @@ const PersonalInfo = ({
         sx={{
           display: "flex",
           justifyContent: "center",
+          marginBottom: {
+            md: "30px",
+          },
         }}
       >
         <Card
@@ -108,124 +107,17 @@ const PersonalInfo = ({
       </Grid>
 
       <Grid item xs={12} sm={12} md={12}>
-        {(externalIdsData?.facebook_id ||
-          externalIdsData?.twitter_id ||
-          externalIdsData?.instagram_id ||
-          externalIdsData?.youtube_id) && (
-          <Box
-            sx={{
-              marginTop: {
-                md: "30px",
-              },
-              display: "flex",
-              justifyContent: {
-                xs: "center",
-                sm: "center",
-                md: "start",
-              },
-            }}
-          >
-            {externalIdsData?.facebook_id && (
-              <Link
-                href={`${UrlConfig.FACEBOOK_URL}${externalIdsData?.facebook_id}`}
-                target="_blank"
-              >
-                <CustomTooltip title="Visit Facebook">
-                  <FacebookOutlinedIcon
-                    sx={{
-                      fontSize: {
-                        xs: 30,
-                        sm: 30,
-                        md: 40,
-                        lg: 40,
-                      },
-                    }}
-                  />
-                </CustomTooltip>
-              </Link>
-            )}
-
-            {externalIdsData?.twitter_id && (
-              <Link
-                href={`${UrlConfig.TWITTER_URL}${externalIdsData?.twitter_id}`}
-                target="_blank"
-              >
-                <CustomTooltip title="Visit Twitter">
-                  <TwitterIcon
-                    sx={{
-                      fontSize: {
-                        xs: 30,
-                        sm: 30,
-                        md: 40,
-                        lg: 40,
-                      },
-                      marginLeft: `${
-                        externalIdsData?.facebook_id ? "15px" : "0px"
-                      }`,
-                    }}
-                  />
-                </CustomTooltip>
-              </Link>
-            )}
-
-            {externalIdsData?.instagram_id && (
-              <Link
-                href={`${UrlConfig.INSTAGRAM_URL}${externalIdsData?.instagram_id}`}
-                target="_blank"
-              >
-                <CustomTooltip title="Visit Instagram">
-                  <InstagramIcon
-                    sx={{
-                      fontSize: {
-                        xs: 30,
-                        sm: 30,
-                        md: 40,
-                        lg: 40,
-                      },
-                      marginLeft: `${
-                        externalIdsData?.facebook_id ||
-                        externalIdsData?.twitter_id
-                          ? "15px"
-                          : "0px"
-                      }`,
-                    }}
-                  />
-                </CustomTooltip>
-              </Link>
-            )}
-
-            {externalIdsData?.youtube_id && (
-              <Link
-                href={`${UrlConfig.YOUTUBE_URL}${externalIdsData?.youtube_id}`}
-                target="_blank"
-              >
-                <CustomTooltip title="Visit Youtube">
-                  <YouTubeIcon
-                    sx={{
-                      fontSize: {
-                        xs: 30,
-                        sm: 30,
-                        md: 40,
-                        lg: 40,
-                      },
-                      marginLeft: `${
-                        externalIdsData?.facebook_id ||
-                        externalIdsData?.twitter_id ||
-                        externalIdsData?.instagram_id
-                          ? "15px"
-                          : "0px"
-                      }`,
-                    }}
-                  />
-                </CustomTooltip>
-              </Link>
-            )}
-          </Box>
-        )}
+        <SocialMediaLink
+          facebookId={externalIdsData?.facebook_id}
+          twitterId={externalIdsData?.twitter_id}
+          instagramId={externalIdsData?.instagram_id}
+          youtubeId={externalIdsData?.youtube_id}
+          website={personDetailsData?.homepage}
+        />
       </Grid>
 
       <Grid item xs={12} sm={12} md={12}>
-        <Box sx={{ marginTop: "30px" }}>
+        <Box>
           <Typography
             sx={{ fontSize: "20px", fontWeight: 600, marginBottom: "8px" }}
           >

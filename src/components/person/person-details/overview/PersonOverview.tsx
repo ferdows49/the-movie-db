@@ -18,6 +18,7 @@ type PropsType = {
     gender: number;
     place_of_birth: string;
     also_known_as: string[];
+    homepage: string;
   };
   combinedCreditsData: {
     cast: {
