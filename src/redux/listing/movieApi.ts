@@ -27,12 +27,12 @@ export const movieApi = createApi({
         params: { api_key: UrlConfig.API_KEY },
       }),
     }),
-    getFilteredData: builder.query({
-      query: (param: object) => ({
-        url: `${ApiService.GET_FILTERED_DATA}`,
-        params: { ...param, api_key: UrlConfig.API_KEY },
-      }),
-    }),
+    // getFilteredData: builder.query({
+    //   query: (param: object) => ({
+    //     url: `${ApiService.GET_FILTERED_DATA}`,
+    //     params: { ...param, api_key: UrlConfig.API_KEY },
+    //   }),
+    // }),
   }),
 });
 
@@ -40,5 +40,4 @@ export const {
   useGetPopularMoviesQuery,
   useGetMovieGenresQuery,
   useGetLanguagesQuery,
-  useGetFilteredDataQuery
 } = movieApi;
