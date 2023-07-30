@@ -78,6 +78,7 @@ const OverviewBanner = () => {
               )}
             </Box>
           </Grid>
+
           <Grid item md={9}>
             <Box sx={{ marginBottom: "20px" }}>
               <Box
@@ -104,6 +105,7 @@ const OverviewBanner = () => {
                   {`(${mediaDetailsData?.release_date?.slice(0, 4)})`}
                 </Typography>
               </Box>
+
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Typography
                   sx={{
@@ -115,7 +117,9 @@ const OverviewBanner = () => {
                     paddingY: "2px",
                   }}
                 >
-                  {mediaDetailsData?.spoken_languages[0]?.name}
+                  {mediaDetailsData?.spoken_languages &&
+                    mediaDetailsData?.spoken_languages?.length > 0 &&
+                    mediaDetailsData?.spoken_languages[0]?.name}
                 </Typography>
                 <Typography sx={{ color: "#FFFFFF" }}>
                   {`${
@@ -130,7 +134,7 @@ const OverviewBanner = () => {
                   sx={{ color: "#FFFFFF", fontSize: "8px", marginX: "5px" }}
                 />
                 <Typography sx={{ color: "#FFFFFF" }}>
-                  {mediaDetailsData?.genres?.map((el) => el.name)?.join(", ")}
+                  {mediaDetailsData?.genres?.map((el) => el?.name)?.join(", ")}
                 </Typography>
                 <FiberManualRecordIcon
                   sx={{ color: "#FFFFFF", fontSize: "8px", marginX: "5px" }}
@@ -142,7 +146,9 @@ const OverviewBanner = () => {
                 </Typography>
               </Box>
             </Box>
+
             <OverviewBannerActionButtons />
+
             <Box>
               <Typography
                 sx={{
@@ -168,6 +174,7 @@ const OverviewBanner = () => {
                 {mediaDetailsData?.overview}
               </Typography>
             </Box>
+
             <Grid container rowSpacing={2}>
               {creditsData?.crew &&
                 creditsData?.crew?.length > 0 &&
@@ -176,7 +183,7 @@ const OverviewBanner = () => {
                     (item?.job === "Director" ||
                       item?.job === "Writer" ||
                       item?.job === "Characters") && (
-                      <Grid item md={4}>
+                      <Grid item md={4} key={item?.id}>
                         <Typography sx={{ color: "#FFFFFF", fontWeight: 700 }}>
                           {item?.name}
                         </Typography>

@@ -46,7 +46,6 @@ const Home = ({
   latestMovieData,
   whatsPopularData,
 }: PropsType) => {
-  console.log("whatsPopularData", whatsPopularData);
 
   return (
     <Box>

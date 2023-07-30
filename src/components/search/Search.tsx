@@ -56,8 +56,6 @@ const Search = ({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
-  console.log("currentData", currentData);
-
   const handlePageChange = async (event: any, page: number = 1) => {
     setLoading(true);
 

@@ -32,7 +32,6 @@ const ItemCard = ({
   fromHome = false,
   textWhite = false,
 }: ItemCardPropsType) => {
-  console.log("media type", mediaType);
 
   return (
     <>

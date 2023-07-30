@@ -71,7 +71,7 @@ const PersonDetails = ({
   // console.log("combinedCreditsData", combinedCreditsData);
   // console.log("movieCreditsData", movieCreditsData);
   // console.log("tvCreditsData", tvCreditsData);
-  console.log("personImageData", personImageData);
+  // console.log("personImageData", personImageData);
 
   const [value, setValue] = useState("1");
 

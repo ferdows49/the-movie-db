@@ -19,8 +19,6 @@ const Trailers = ({ latestMovieData }: PropsType) => {
   const [trailerType, setTrailerType] = useState<string>("On TV");
   const [currentData, setCurrentData] = useState<any>();
 
-  console.log("currentData", currentData);
-
   useEffect(() => {
     const getData = async () => {
       let url;
