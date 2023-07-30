@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-  Grid,
-  Pagination,
-  Typography,
-  Card,
-} from "@mui/material";
+import { Grid, Pagination, Typography, Card } from "@mui/material";
 import { UrlConfig } from "@/src/config/UrlConfig";
 import axios from "axios";
 import { ApiService } from "@/src/config/ApiService";
@@ -24,7 +19,6 @@ type TvShowListPropsType = {
 type ItemTypes = {
   id: number;
   name: string;
-  media_type: string;
   vote_average: number;
   first_air_date: Date | string;
   poster_path: string;
@@ -141,7 +135,7 @@ const TvShowList = ({ data, slug }: TvShowListPropsType) => {
                           <ItemCard
                             key={item?.id}
                             id={item?.id}
-                            mediaType={item?.media_type}
+                            mediaType={`tv`}
                             title={item?.name}
                             posterPath={item?.poster_path}
                             releaseDate={item?.first_air_date}

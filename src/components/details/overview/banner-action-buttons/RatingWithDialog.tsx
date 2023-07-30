@@ -9,6 +9,7 @@ import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { useAppSelector } from "@/src/redux/hooks";
 const data = [{name: 'Page A', uv: 200, pv: 1200, amt: 1200},];
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -50,7 +51,11 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
   );
 }
 
-const RatingWithDialog = ({ voteAverage = 7 }: any) => {
+const RatingWithDialog = () => {
+  const mediaDetailsData = useAppSelector(
+    (state) => state.mediaDetailsReducer.mediaDetailsData
+  );
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -62,11 +67,11 @@ const RatingWithDialog = ({ voteAverage = 7 }: any) => {
 
   let color;
 
-  if (Math.round((voteAverage / 10) * 100) >= 75) {
+  if (Math.round((mediaDetailsData?.vote_average / 10) * 100) >= 75) {
     color = "#4caf50";
   } else if (
-    Math.round((voteAverage / 10) * 100) < 75 &&
-    Math.round((voteAverage / 10) * 100) > 30
+    Math.round((mediaDetailsData?.vote_average / 10) * 100) < 75 &&
+    Math.round((mediaDetailsData?.vote_average / 10) * 100) > 30
   ) {
     color = "#ffc107";
   } else {
@@ -76,7 +81,7 @@ const RatingWithDialog = ({ voteAverage = 7 }: any) => {
   return (
     <Box>
       <Box
-        onClick={handleClickOpen}
+        // onClick={handleClickOpen}
         className="h-16 w-16 bg-black rounded-full relative inline-flex cursor-pointer"
       >
         <CircularProgress
@@ -87,7 +92,7 @@ const RatingWithDialog = ({ voteAverage = 7 }: any) => {
             width: "64px !important",
           }}
           variant="determinate"
-          value={Math.round((voteAverage / 10) * 100)}
+          value={Math.round((mediaDetailsData?.vote_average / 10) * 100)}
         />
         <Box
           sx={{
@@ -104,7 +109,7 @@ const RatingWithDialog = ({ voteAverage = 7 }: any) => {
           <Typography
             sx={{ fontSize: "16px" }}
             className="text-slate-100"
-          >{`${Math.round((voteAverage / 10) * 100)}%`}</Typography>
+          >{`${Math.round((mediaDetailsData?.vote_average / 10) * 100)}%`}</Typography>
         </Box>
       </Box>
       <BootstrapDialog

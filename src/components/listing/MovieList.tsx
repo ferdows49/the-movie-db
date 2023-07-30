@@ -20,7 +20,6 @@ type ItemTypes = {
   id: number;
   title: string;
   name?: string;
-  media_type: string;
   vote_average: number;
   release_date: Date | string;
   first_air_date: Date | string;
@@ -28,8 +27,9 @@ type ItemTypes = {
 };
 
 const MovieList = ({ data, slug }: MovieListPropsType) => {
-  const { filterUrl, isFilterParams } = useAppSelector(
-    (state) => state.listingReducer
+  const filterUrl = useAppSelector((state) => state.listingReducer.filterUrl);
+  const isFilterParams = useAppSelector(
+    (state) => state.listingReducer.isFilterParams
   );
 
   const [currentData, setCurrentData] = useState<any>();
@@ -139,7 +139,7 @@ const MovieList = ({ data, slug }: MovieListPropsType) => {
                           <ItemCard
                             key={item?.id}
                             id={item?.id}
-                            mediaType={item?.media_type}
+                            mediaType={`movie`}
                             title={item?.title}
                             posterPath={item?.poster_path}
                             releaseDate={item?.release_date}

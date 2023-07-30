@@ -14,7 +14,7 @@ import CircularLoading from "../shared/CircularLoading";
 import SearchPeople from "./search-content/SearchPeople";
 import SearchCompanies from "./search-content/SearchCompanies";
 import SearchKeywords from "./search-content/SearchKeywords";
-import { setSearchResultBy } from "@/src/redux/search/searchSlich";
+import { setSearchResultBy } from "@/src/redux/search/searchSlice";
 
 type PropsType = {
   searchMovieData: {

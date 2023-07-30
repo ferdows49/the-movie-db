@@ -1,7 +1,7 @@
 import React from "react";
 import { Chip, ListItemButton, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { setSearchResultBy } from "@/src/redux/search/searchSlich";
+import { setSearchResultBy } from "@/src/redux/search/searchSlice";
 
 type PropsType = {
   title: string;

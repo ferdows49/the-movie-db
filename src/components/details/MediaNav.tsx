@@ -76,7 +76,6 @@ const MediaNav = () => {
                 }
                 value="2"
               />
-              <Tab label="Reviews" value="3" />
             </TabList>
           </Box>
           <TabPanel value="1" sx={{ padding: 0 }}>
@@ -84,10 +83,6 @@ const MediaNav = () => {
           </TabPanel>
 
           <TabPanel value="2" sx={{ padding: 0 }}>
-            srer
-          </TabPanel>
-
-          <TabPanel value="3" sx={{ padding: 0 }}>
             srer
           </TabPanel>
 
