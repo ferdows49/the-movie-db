@@ -6,6 +6,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MediaOverview from "./overview/MediaOverview";
+import CastAndCrew from "./cast-and-crew/CastAndCrew";
 
 const MediaNav = () => {
   const [overviewAnchorEl, setOverviewAnchorEl] =
@@ -83,7 +84,7 @@ const MediaNav = () => {
           </TabPanel>
 
           <TabPanel value="2" sx={{ padding: 0 }}>
-            srer
+            <CastAndCrew handleChange={handleChange} />
           </TabPanel>
 
           <Menu
